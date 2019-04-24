@@ -11,18 +11,29 @@
   </head>
 
   <body>
-    <div id="map"></div>
+    <div class="container">
+      <div id="map"></div>
 
-    <div>
-      <label>Your location</label>
-      <input type="text" />
+      <div class="locations">
+        <div>
+          <label>Your location</label>
+          <input type="text" id="yourLocation" />
+        </div>
+
+        <div>
+          <label>Their location</label>
+          <input type="text" id="theirLocation" />
+        </div>
+
+        <button id="meet">Meet in the Middle!</button>
+      </div>
     </div>
 
     <script src="main.js"></script>
     <script
       async
       defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPKf9z8oFE2CcLeK5_SW1gFWqwBTY91g8&callback=initMap"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPKf9z8oFE2CcLeK5_SW1gFWqwBTY91g8&callback=initMap&libraries=places"
     ></script>
   </body>
 </html>

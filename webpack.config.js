@@ -1,6 +1,7 @@
 module.exports = {
   devServer: {
-    open: true
+    open: true,
+    hotOnly: true
   },
   module: {
     rules: [
