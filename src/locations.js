@@ -1,4 +1,4 @@
-import { insertMarker, fitBounds } from "./map";
+import { insertMarker, fitBounds, setMapCenter } from "./map";
 
 let locationInputs = {
   yourLocation: {
@@ -13,9 +13,45 @@ let locationInputs = {
   }
 };
 
-export function initAutocomplete() {
-  locationInputs.yourLocation.ref = createAutocompleteInput("yourLocation");
-  locationInputs.theirLocation.ref = createAutocompleteInput("theirLocation");
+const getGeoLocation = new Promise(resolve => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const geoPosition = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        const circle = new google.maps.Circle({
+          center: geoPosition,
+          radius: position.coords.accuracy
+        });
+
+        const geoBounds = circle.getBounds();
+
+        setMapCenter(geoPosition);
+        resolve(geoBounds);
+      },
+      () => {
+        resolve(null); // USER MAY HAVE BLOCKED LOCATION
+      }
+    );
+  } else {
+    resolve(null);
+  }
+});
+
+export async function initAutocomplete() {
+  const bounds = await getGeoLocation;
+
+  locationInputs.yourLocation.ref = createAutocompleteInput({
+    inputId: "yourLocation",
+    bounds
+  });
+  locationInputs.theirLocation.ref = createAutocompleteInput({
+    inputId: "theirLocation",
+    bounds
+  });
 }
 
 export function getMeetingPoint() {
@@ -44,10 +80,10 @@ function handleAddressSelected(inputId) {
   locationInputs[inputId].marker = insertMarker(coordinates);
 }
 
-function createAutocompleteInput(inputId) {
+function createAutocompleteInput({ inputId, bounds }) {
   const input = new google.maps.places.Autocomplete(
     document.getElementById(inputId),
-    { types: ["geocode"] }
+    { bounds, types: ["geocode"] }
   );
 
   input.setFields(["address_component", "geometry"]);
