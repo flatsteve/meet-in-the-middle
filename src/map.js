@@ -27,7 +27,7 @@ export function insertMarker(locationLatLng) {
   return marker;
 }
 
-export function fitBounds(bounds) {
+export function fitMapToBounds(bounds) {
   map.fitBounds(bounds);
 }
 

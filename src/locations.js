@@ -1,4 +1,4 @@
-import { insertMarker, fitBounds, setMapCenter } from "./map";
+import { insertMarker, fitMapToBounds, setMapCenter } from "./map";
 
 let locationInputs = {
   yourLocation: {
@@ -61,7 +61,7 @@ export function getMeetingPoint() {
     bounds.extend(locationInputs[input].coordinates);
   }
 
-  fitBounds(bounds);
+  fitMapToBounds(bounds);
 }
 
 function handleAddressSelected(inputId) {
