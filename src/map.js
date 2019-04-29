@@ -13,10 +13,14 @@ export function initMap() {
   initAutocomplete();
 }
 
-export function insertMarker(locationLatLng, { recenter = true } = {}) {
+export function insertMarker(
+  locationLatLng,
+  { recenter = true, animation = "DROP" } = {}
+) {
   const marker = new google.maps.Marker({
     position: locationLatLng,
     map: map,
+    animation: google.maps.Animation[animation],
     title: "Hello World"
   });
 
@@ -31,7 +35,7 @@ export function insertMarker(locationLatLng, { recenter = true } = {}) {
 }
 
 export function showMeetingPoint(bounds) {
-  insertMarker(bounds.getCenter(), { recenter: false });
+  insertMarker(bounds.getCenter(), { recenter: false, animation: "BOUNCE" });
   map.fitBounds(bounds);
 }
 

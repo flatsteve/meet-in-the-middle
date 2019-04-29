@@ -45,6 +45,9 @@ export async function initAutocomplete() {
   });
 }
 
+/*
+  Meet in the Middle was clicked
+*/
 export function getMeetingPoint() {
   let bounds = new google.maps.LatLngBounds();
 
@@ -55,12 +58,16 @@ export function getMeetingPoint() {
   showMeetingPoint(bounds);
 }
 
+/*
+  Address was selected from Google Places select
+*/
 function handleAddressSelected(inputId) {
   const place = locationInputs[inputId].ref.getPlace().geometry.location;
 
   const lat = place.lat();
   const lng = place.lng();
   const coordinates = { lat, lng };
+  const title = inputId === "yourLocation" ? "Your Location" : "Their Location";
 
   locationInputs[inputId].coordinates = coordinates;
 
@@ -68,7 +75,7 @@ function handleAddressSelected(inputId) {
     locationInputs[inputId].marker.setMap(null);
   }
 
-  locationInputs[inputId].marker = insertMarker(coordinates);
+  locationInputs[inputId].marker = insertMarker(coordinates, { title });
 }
 
 function createAutocompleteInput({ inputId, bounds }) {

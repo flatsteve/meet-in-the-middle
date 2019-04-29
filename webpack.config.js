@@ -1,4 +1,7 @@
 module.exports = {
+  output: {
+    path: __dirname
+  },
   devServer: {
     open: true,
     hotOnly: true
