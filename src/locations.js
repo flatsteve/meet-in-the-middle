@@ -1,17 +1,7 @@
-import { insertMarker, fitMapToBounds, setMapCenter } from "./map";
+import { insertMarker, showMeetingPoint, setMapCenter } from "./map";
+import { LOCATION_INPUTS_INITIAL_VALUES } from "./constants";
 
-let locationInputs = {
-  yourLocation: {
-    coordinates: null,
-    ref: null,
-    marker: null
-  },
-  theirLocation: {
-    coordinates: null,
-    ref: null,
-    marker: null
-  }
-};
+let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
 
 const getGeoLocation = new Promise(resolve => {
   if (navigator.geolocation) {
@@ -48,6 +38,7 @@ export async function initAutocomplete() {
     inputId: "yourLocation",
     bounds
   });
+
   locationInputs.theirLocation.ref = createAutocompleteInput({
     inputId: "theirLocation",
     bounds
@@ -61,7 +52,7 @@ export function getMeetingPoint() {
     bounds.extend(locationInputs[input].coordinates);
   }
 
-  fitMapToBounds(bounds);
+  showMeetingPoint(bounds);
 }
 
 function handleAddressSelected(inputId) {

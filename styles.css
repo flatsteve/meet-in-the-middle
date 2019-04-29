@@ -21,6 +21,29 @@ body {
   margin-top: 1.25rem;
 }
 
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
 input {
-  padding: 0.75rem 1.25rem;
+  border: 2px solid #5ca4a9;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  min-width: 12rem;
+  padding: 0.75rem;
+}
+
+input:focus {
+  border-color: black;
+  outline: none;
+}
+
+button {
+  background-color: #ed6a5a;
+  border: none;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  padding: 1.25rem;
 }
