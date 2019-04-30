@@ -20,6 +20,7 @@ body {
   display: flex;
   justify-content: space-around;
   margin: 2.5rem 0;
+  padding: 0 1.25rem;
 }
 
 label {
@@ -55,4 +56,14 @@ button {
 
 button:focus {
   outline: none;
+}
+
+@media (max-width: 768px) {
+  .locations {
+    flex-wrap: wrap;
+  }
+
+  input {
+    margin-bottom: 1.25rem;
+  }
 }
