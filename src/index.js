@@ -1,13 +1,16 @@
 import { initMap } from "./map";
 import { initLocationsAutocomplete } from "./locations";
+import { initPlacesService } from "./places";
 import { getMeetingPoint } from "./locations";
 
 if (module.hot) {
   module.hot.accept();
 }
 
-initMap();
+// Initialize all services
+const map = initMap();
 initLocationsAutocomplete();
+initPlacesService(map);
 
 // TODO Move to controls file?
 const meetButton = document.getElementById("meet");

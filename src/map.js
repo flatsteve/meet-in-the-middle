@@ -1,3 +1,4 @@
+import { getNearbyPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
 
 let map;
@@ -7,6 +8,7 @@ let map;
 */
 export function initMap() {
   map = new google.maps.Map(document.getElementById("map"), MAP_CONFIG);
+  return map;
 }
 
 /*
@@ -14,13 +16,22 @@ export function initMap() {
 */
 export function insertMarker(
   locationLatLng,
-  { recenter = true, animation = "DROP" } = {}
+  {
+    recenter = true,
+    animation = "DROP",
+    title = "Location",
+    markerColour = "red"
+  } = {}
 ) {
+  const markerURL = `http://maps.google.com/mapfiles/ms/icons/${markerColour}-dot.png`;
   const marker = new google.maps.Marker({
     position: locationLatLng,
     map: map,
     animation: google.maps.Animation[animation],
-    title: "Hello World"
+    title,
+    icon: {
+      url: markerURL
+    }
   });
 
   if (recenter) {
@@ -38,6 +49,12 @@ export function setMapCenter(geoLocation) {
 }
 
 export function showMeetingPoint(bounds) {
-  insertMarker(bounds.getCenter(), { recenter: false, animation: "BOUNCE" });
+  const centerPoint = bounds.getCenter();
+  insertMarker(centerPoint, {
+    recenter: false,
+    animation: "BOUNCE",
+    title: "The middle!"
+  });
   map.fitBounds(bounds);
+  getNearbyPlaces(centerPoint);
 }

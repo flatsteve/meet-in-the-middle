@@ -69,7 +69,15 @@ function handleAddressSelected(inputId) {
   const lat = place.lat();
   const lng = place.lng();
   const coordinates = { lat, lng };
-  const title = inputId === "yourLocation" ? "Your Location" : "Their Location";
+  let title, markerColour;
+
+  if (inputId === "yourLocation") {
+    title = "Your Location";
+    markerColour = "purple";
+  } else {
+    title = "Their Location";
+    markerColour = "pink";
+  }
 
   locationInputs[inputId].coordinates = coordinates;
 
@@ -77,7 +85,10 @@ function handleAddressSelected(inputId) {
     locationInputs[inputId].marker.setMap(null);
   }
 
-  locationInputs[inputId].marker = insertMarker(coordinates, { title });
+  locationInputs[inputId].marker = insertMarker(coordinates, {
+    title,
+    markerColour
+  });
 }
 
 /*
