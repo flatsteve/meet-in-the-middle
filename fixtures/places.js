@@ -1,4 +1,4 @@
-const places = [
+export const placeResults = [
   {
     geometry: {
       location: {

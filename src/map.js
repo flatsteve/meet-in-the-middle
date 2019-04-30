@@ -1,4 +1,4 @@
-import { getNearbyPlaces } from "./places";
+import { showNearbyPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
 
 let map;
@@ -56,5 +56,5 @@ export function showMeetingPoint(bounds) {
     title: "The middle!"
   });
   map.fitBounds(bounds);
-  getNearbyPlaces(centerPoint);
+  showNearbyPlaces(centerPoint);
 }
