@@ -23,7 +23,7 @@ export function insertMarker(
     markerColour = "red"
   } = {}
 ) {
-  const markerURL = `http://maps.google.com/mapfiles/ms/icons/${markerColour}-dot.png`;
+  const markerURL = `https://maps.google.com/mapfiles/ms/icons/${markerColour}-dot.png`;
   const marker = new google.maps.Marker({
     position: locationLatLng,
     map: map,
