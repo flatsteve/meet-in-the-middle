@@ -10,7 +10,7 @@
     "prod": "webpack --mode production",
     "add-dist": "git add dist && git commit -m \"Release\"",
     "push-dist": "git subtree push --prefix dist origin gh-pages",
-    "deploy": "npm run prod && npm run add-dist && push-dist"
+    "deploy": "npm run prod && npm run add-dist && npm run push-dist"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
