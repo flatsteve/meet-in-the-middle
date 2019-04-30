@@ -23,7 +23,8 @@ const getGeoLocation = new Promise(resolve => {
         resolve(geoBounds);
       },
       () => {
-        resolve(null); // USER MAY HAVE BLOCKED LOCATION
+        // User may have blocked location
+        resolve(null);
       }
     );
   } else {
@@ -31,7 +32,7 @@ const getGeoLocation = new Promise(resolve => {
   }
 });
 
-export async function initAutocomplete() {
+export async function initLocationsAutocomplete() {
   const bounds = await getGeoLocation;
 
   locationInputs.yourLocation.ref = createAutocompleteInput({
@@ -41,7 +42,7 @@ export async function initAutocomplete() {
 
   locationInputs.theirLocation.ref = createAutocompleteInput({
     inputId: "theirLocation",
-    bounds
+    bounds // TODO - should we constrain "their" bounds?
   });
 }
 
@@ -59,7 +60,8 @@ export function getMeetingPoint() {
 }
 
 /*
-  Address was selected from Google Places select
+  Handle when address was selected from Google Places select and
+  get the lat lng to insert a marker - also clears any previous marker
 */
 function handleAddressSelected(inputId) {
   const place = locationInputs[inputId].ref.getPlace().geometry.location;
@@ -78,13 +80,18 @@ function handleAddressSelected(inputId) {
   locationInputs[inputId].marker = insertMarker(coordinates, { title });
 }
 
+/*
+  Creates a new autocomplete location input and binds the handleAddressSelected 
+  function to fire when user selects a location - note that we only need the geometry
+  of the selected place
+*/
 function createAutocompleteInput({ inputId, bounds }) {
-  const input = new google.maps.places.Autocomplete(
+  let input = new google.maps.places.Autocomplete(
     document.getElementById(inputId),
     { bounds, types: ["geocode"] }
   );
 
-  input.setFields(["address_component", "geometry"]);
+  input.setFields(["geometry"]);
   input.addListener("place_changed", () => handleAddressSelected(inputId));
 
   return input;

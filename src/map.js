@@ -1,18 +1,17 @@
-import { initAutocomplete } from "./locations";
-import { CENTRAL_LND_COORDS } from "./constants";
+import { MAP_CONFIG } from "./constants";
 
 let map;
 
+/*
+  Initialize the map (runs after Google Maps is synchronously loaded)
+*/
 export function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: CENTRAL_LND_COORDS,
-    mapTypeControl: false,
-    zoom: 12
-  });
-
-  initAutocomplete();
+  map = new google.maps.Map(document.getElementById("map"), MAP_CONFIG);
 }
 
+/*
+  Insert marker on the map and recenter to show the marker by default
+*/
 export function insertMarker(
   locationLatLng,
   { recenter = true, animation = "DROP" } = {}
@@ -34,11 +33,11 @@ export function insertMarker(
   return marker;
 }
 
+export function setMapCenter(geoLocation) {
+  map.setCenter(geoLocation);
+}
+
 export function showMeetingPoint(bounds) {
   insertMarker(bounds.getCenter(), { recenter: false, animation: "BOUNCE" });
   map.fitBounds(bounds);
-}
-
-export function setMapCenter(geoLocation) {
-  map.setCenter(geoLocation);
 }
