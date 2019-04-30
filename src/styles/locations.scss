@@ -1,7 +1,9 @@
+@import "./colours";
+
 .locations {
   align-items: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 2.5rem 0;
   padding: 0 1.25rem;
 }
@@ -12,24 +14,26 @@ label {
 }
 
 input {
-  border: 2px solid #5ca4a9;
+  border: 2px solid $blue;
   border-radius: 0.5rem;
   font-size: 1rem;
   min-width: 12rem;
   padding: 0.75rem;
+  transition: border 0.3s ease-in;
 }
 
 input:focus {
-  border-color: black;
+  border-color: darken($blue, 15%);
   outline: none;
 }
 
 ::placeholder {
+  color: $grey;
   font-style: italic;
 }
 
 button {
-  background-color: #ed6a5a;
+  background-color: $purple;
   border: none;
   color: #ffffff;
   border-radius: 0.5rem;

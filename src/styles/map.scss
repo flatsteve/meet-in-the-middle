@@ -1,3 +1,6 @@
+@import "./colours";
+
 #map {
+  border-bottom: 2px solid $blue;
   height: 75vh;
 }

@@ -3,11 +3,29 @@ import { placeResults } from "../__fixtures__/places";
 
 let placesService;
 
+function getPlacePhoto(place) {
+  if (!place) {
+    return;
+  }
+
+  if (place.photos) {
+    const placeImageURL = place.photos[0].getUrl({
+      maxWidth: 512
+    });
+
+    return `<div class="place__image" style="background-image: url(${placeImageURL})"></div>`;
+  }
+
+  return '<div class="place__image"></div>';
+}
+
 function buildPlaceTemplate(place) {
   return `
     <div class="place">
+      ${getPlacePhoto(place)}
+
       <h3>${place.name}</h3>
-      <p>Address: ${place.vicinity}</p>
+      <p class="place__address">${place.vicinity}</p>
       <p>Rating: ${place.rating}</p>
     </div>
   `;
@@ -28,15 +46,19 @@ export function showNearbyPlaces(location, { type = "restaurant" } = {}) {
 
   placesService.nearbySearch(request, (results, status) => {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-      results.forEach(placeResult => {
-        const placeLocation = placeResult.geometry.location;
+      results
+        .sort((a, b) => {
+          return b.rating - a.rating;
+        })
+        .forEach(placeResult => {
+          const placeLocation = placeResult.geometry.location;
 
-        insertMarker(placeLocation, { title: placeResult.name });
-        $placeDetailsContainer.insertAdjacentHTML(
-          "beforeend",
-          buildPlaceTemplate(placeResult)
-        );
-      });
+          insertMarker(placeLocation, { title: placeResult.name });
+          $placeDetailsContainer.insertAdjacentHTML(
+            "beforeend",
+            buildPlaceTemplate(placeResult)
+          );
+        });
     }
   });
 }

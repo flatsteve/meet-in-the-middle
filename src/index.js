@@ -13,7 +13,7 @@ if (module.hot) {
 const map = initMap();
 initLocationsAutocomplete();
 initPlacesService(map);
-testPlaces();
+// testPlaces();
 
 // TODO Move to controls file?
 const meetButton = document.getElementById("meet");

@@ -1,0 +1,27 @@
+$place-size: 16rem;
+
+.place-details {
+  display: flex;
+  overflow-y: scroll;
+  overflow-y: hidden;
+  margin: 0 1.25rem 2.5rem;
+}
+
+.place {
+  margin-right: 1.25rem;
+  min-width: $place-size;
+
+  &__address {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__image {
+    background-color: $grey;
+    background-size: cover;
+    background-position: top;
+    height: $place-size - $place-size / 4;
+    width: $place-size;
+  }
+}
