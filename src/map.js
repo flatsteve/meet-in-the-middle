@@ -53,7 +53,8 @@ export function showMeetingPoint(bounds) {
   insertMarker(centerPoint, {
     recenter: false,
     animation: "BOUNCE",
-    title: "The middle!"
+    title: "The middle!",
+    markerColour: "blue"
   });
   map.fitBounds(bounds);
   showNearbyPlaces(centerPoint);
