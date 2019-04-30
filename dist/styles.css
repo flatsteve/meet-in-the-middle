@@ -79,8 +79,6 @@ button:focus {
     justify-content: center;
     height: 12rem;
     width: 16rem; }
-    .place__image:before {
-      color: #fff;
-      content: "No image found";
-      display: block; }
+    .place__image p {
+      color: #fff; }
 
