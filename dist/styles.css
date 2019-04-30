@@ -66,14 +66,21 @@ button:focus {
 .place {
   margin-right: 1.25rem;
   min-width: 16rem; }
-  .place__address {
+  .place__title, .place__address {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; }
   .place__image {
-    background-color: #918695;
+    align-items: center;
+    background-color: #dbd8dc;
     background-size: cover;
     background-position: top;
+    display: flex;
+    justify-content: center;
     height: 12rem;
     width: 16rem; }
+    .place__image:before {
+      color: #fff;
+      content: "No image found";
+      display: block; }
 
