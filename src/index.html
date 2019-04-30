@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Meet in the Middle</title>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="map"></div>
+
+      <div class="locations">
+        <div>
+          <label for="yourLocation">Your location</label>
+
+          <input
+            type="text"
+            id="yourLocation"
+            placeholder="e.g. 17 Cherry Tree Lane"
+          />
+        </div>
+
+        <div>
+          <label for="theirLocation">Their location</label>
+
+          <input
+            type="text"
+            id="theirLocation"
+            placeholder="e.g. 221B Baker St"
+          />
+        </div>
+
+        <button id="meet">Meet in the Middle!</button>
+      </div>
+
+      <div class="place-details"></div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPKf9z8oFE2CcLeK5_SW1gFWqwBTY91g8&libraries=places"></script>
+  </body>
+</html>

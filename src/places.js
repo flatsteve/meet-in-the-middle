@@ -1,5 +1,5 @@
 import { insertMarker } from "./map";
-import { placeResults } from "../fixtures/places";
+import { placeResults } from "../__fixtures__/places";
 
 let placesService;
 

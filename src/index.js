@@ -3,6 +3,8 @@ import { initLocationsAutocomplete } from "./locations";
 import { initPlacesService, testPlaces } from "./places";
 import { getMeetingPoint } from "./locations";
 
+import "./styles.scss";
+
 if (module.hot) {
   module.hot.accept();
 }
