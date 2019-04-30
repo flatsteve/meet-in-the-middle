@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development",
     "prod": "webpack --mode production",
-    "add-dist": "git add dist && git commit -m 'Release'",
+    "add-dist": "git add dist && git commit -m \"Release\"",
     "push-dist": "git subtree push --prefix dist origin gh-pages",
     "deploy": "npm run prod && npm run add-dist && push-dist"
   },
