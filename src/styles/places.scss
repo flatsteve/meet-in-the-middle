@@ -28,10 +28,8 @@ $place-size: 16rem;
     height: $place-size - $place-size / 4;
     width: $place-size;
 
-    &:before {
+    p {
       color: $white;
-      content: "No image found";
-      display: block;
     }
   }
 }

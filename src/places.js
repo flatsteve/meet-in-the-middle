@@ -17,7 +17,7 @@ function getPlacePhoto(place) {
     return `<div class="place__image" style="background-image: url(${placeImageURL})"></div>`;
   }
 
-  return '<div class="place__image"></div>';
+  return '<div class="place__image"><p>No image found</p></div>';
 }
 
 function buildPlaceTemplate(place) {
