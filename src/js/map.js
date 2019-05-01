@@ -2,6 +2,7 @@ import { showNearbyPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
 
 let map;
+let mapMarkers = [];
 
 /*
   Initialize the map (runs after Google Maps is synchronously loaded)
@@ -41,7 +42,15 @@ export function insertMarker(
     });
   }
 
+  mapMarkers.push(marker);
+
   return marker;
+}
+
+export function clearMarkers() {
+  mapMarkers.forEach(marker => {
+    marker.setMap(null);
+  });
 }
 
 export function setMapCenter(geoLocation) {

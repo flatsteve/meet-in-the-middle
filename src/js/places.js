@@ -47,6 +47,7 @@ function renderPlaces(places) {
     });
 
   $placeDetailsContainer.addEventListener("click", handlePlaceClick);
+
   toggleShowPlaces();
 }
 

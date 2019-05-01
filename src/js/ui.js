@@ -1,7 +1,9 @@
 import { getMeetingPoint } from "./locations";
+import { clearMarkers } from "./map";
 
 export const $placeDetailsContainer = document.querySelector(".place-details");
 const $locationsContainer = document.querySelector(".locations");
+const $locationsForm = document.getElementById("locations-form");
 const $meetButton = document.getElementById("meet");
 const $searchAgainButton = document.querySelector(".search-again");
 
@@ -42,6 +44,8 @@ export function toggleShowPlaces() {
     $locationsContainer.classList.remove("locations--hide");
     $placeDetailsContainer.classList.remove("place-details--show");
     uiState.placesShown = false;
+    clearMarkers();
+    $locationsForm.reset();
   } else {
     $locationsContainer.classList.add("locations--hide");
     $placeDetailsContainer.classList.add("place-details--show");

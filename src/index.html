@@ -17,32 +17,34 @@
     <div id="map"></div>
 
     <div class="container">
-      <div class="locations">
-        <div>
-          <label for="yourLocation">Your location</label>
+      <form id="locations-form">
+        <div class="locations">
+          <div>
+            <label for="yourLocation">Your location</label>
 
-          <input
-            type="text"
-            id="yourLocation"
-            placeholder="e.g. 17 Cherry Tree Lane"
-          />
+            <input
+              type="text"
+              id="yourLocation"
+              placeholder="e.g. 17 Cherry Tree Lane"
+            />
+          </div>
+
+          <div>
+            <label for="theirLocation">Their location</label>
+
+            <input
+              type="text"
+              id="theirLocation"
+              placeholder="e.g. 221B Baker St"
+            />
+          </div>
+
+          <button id="meet" type="button">Meet in the Middle!</button>
         </div>
-
-        <div>
-          <label for="theirLocation">Their location</label>
-
-          <input
-            type="text"
-            id="theirLocation"
-            placeholder="e.g. 221B Baker St"
-          />
-        </div>
-
-        <button id="meet">Meet in the Middle!</button>
-      </div>
+      </form>
 
       <div class="place-details">
-        <button class="search-again">Search again</button>
+        <button class="search-again" type="button">Search again</button>
       </div>
     </div>
 
