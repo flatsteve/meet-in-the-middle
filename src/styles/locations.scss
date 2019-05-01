@@ -27,7 +27,7 @@ input {
   border: 2px solid $blue;
   border-radius: 0.5rem;
   font-size: 1rem;
-  min-width: 12rem;
+  min-width: 14rem;
   padding: 0.75rem;
   transition: border 0.3s ease-in;
 }
@@ -42,25 +42,14 @@ input:focus {
   font-style: italic;
 }
 
-button {
-  background-color: $purple;
-  border: none;
-  color: #ffffff;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  padding: 1.25rem;
-}
-
-button:focus {
-  outline: none;
-}
-
 @media (max-width: 768px) {
   .locations {
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   input {
     margin-bottom: 1.25rem;
+    width: 100%;
   }
 }

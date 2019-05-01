@@ -1,7 +1,8 @@
 import { getMeetingPoint } from "./locations";
 import { clearMarkers } from "./map";
 
-export const $placeDetailsContainer = document.querySelector(".place-details");
+export const $placesResults = document.querySelector(".places__results");
+const $placesContainer = document.querySelector(".places");
 const $locationsContainer = document.querySelector(".locations");
 const $locationsForm = document.getElementById("locations-form");
 const $meetButton = document.getElementById("meet");
@@ -42,13 +43,13 @@ export function buildPlaceTemplate(place) {
 export function toggleShowPlaces() {
   if (uiState.placesShown) {
     $locationsContainer.classList.remove("locations--hide");
-    $placeDetailsContainer.classList.remove("place-details--show");
+    $placesContainer.classList.remove("places--show");
     uiState.placesShown = false;
     clearMarkers();
     $locationsForm.reset();
   } else {
     $locationsContainer.classList.add("locations--hide");
-    $placeDetailsContainer.classList.add("place-details--show");
+    $placesContainer.classList.add("places--show");
     uiState.placesShown = true;
   }
 }

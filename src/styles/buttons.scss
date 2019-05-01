@@ -1,0 +1,28 @@
+.button {
+  background-color: $purple;
+  border: none;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  padding: 1.25rem;
+  transition: all 0.3s ease-in;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($purple, 15%);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &--link {
+    background-color: $white;
+    color: $purple;
+
+    &:hover {
+      background-color: $white;
+      color: darken($purple, 15%);
+    }
+  }
+}

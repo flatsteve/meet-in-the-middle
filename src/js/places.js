@@ -1,9 +1,5 @@
 import { insertMarker, setMapCenter } from "./map";
-import {
-  buildPlaceTemplate,
-  $placeDetailsContainer,
-  toggleShowPlaces
-} from "./ui";
+import { buildPlaceTemplate, $placesResults, toggleShowPlaces } from "./ui";
 import { placeResults } from "../../__fixtures__/places";
 
 let placesService;
@@ -36,7 +32,7 @@ function renderPlaces(places) {
 
       const marker = insertMarker(placeLocation, { title: placeResult.name });
 
-      $placeDetailsContainer.insertAdjacentHTML(
+      $placesResults.insertAdjacentHTML(
         "beforeend",
         buildPlaceTemplate(placeResult)
       );
@@ -44,7 +40,7 @@ function renderPlaces(places) {
       currentPlacesMarkers[placeResult.id] = marker;
     });
 
-  $placeDetailsContainer.addEventListener("click", handlePlaceClick);
+  $placesResults.addEventListener("click", handlePlaceClick);
 
   toggleShowPlaces();
 }

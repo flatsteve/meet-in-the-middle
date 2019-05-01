@@ -1,8 +1,6 @@
 $place-size: 16rem;
 
-.place-details {
-  display: flex;
-  overflow-y: hidden;
+.places {
   margin: 0.75rem 1.25rem 2.5rem;
   opacity: 0;
   transition: all 0.3s ease-in;
@@ -11,6 +9,11 @@ $place-size: 16rem;
   &--show {
     opacity: 1;
     z-index: 1;
+  }
+
+  &__results {
+    display: flex;
+    overflow-y: hidden;
   }
 }
 
@@ -55,7 +58,6 @@ $place-size: 16rem;
 }
 
 .search-again {
-  position: absolute;
-  right: 1.25rem;
-  top: -2.5rem;
+  display: flex;
+  margin: 0 auto;
 }
