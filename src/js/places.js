@@ -1,36 +1,13 @@
 import { insertMarker } from "./map";
-import { placeResults } from "../__fixtures__/places";
+import {
+  buildPlaceTemplate,
+  $placeDetailsContainer,
+  toggleShowPlaces
+} from "./ui";
+import { placeResults } from "../../__fixtures__/places";
 
 let placesService;
 let currentPlaces = {};
-
-function getPlacePhoto(place) {
-  if (!place) {
-    return;
-  }
-
-  if (place.photos && place.photos[0].getUrl) {
-    const placeImageURL = place.photos[0].getUrl({
-      maxWidth: 512
-    });
-
-    return `<div class="place__image" style="background-image: url(${placeImageURL})"></div>`;
-  }
-
-  return '<div class="place__image"><p>No image found</p></div>';
-}
-
-function buildPlaceTemplate(place) {
-  return `
-    <div class="place" data-id="${place.id}">
-      ${getPlacePhoto(place)}
-
-      <h3 class="place__title">${place.name}</h3>
-      <p class="place__address">${place.vicinity}</p>
-      <p>Rating: ${place.rating}</p>
-    </div>
-  `;
-}
 
 /*
   Resets any marker animations back to null
@@ -43,6 +20,7 @@ function resetCurrentPlaceMarkers() {
 
 function handlePlaceClick(event) {
   resetCurrentPlaceMarkers();
+
   const placeId = event.target.parentNode.dataset.id;
 
   if (placeId) {
@@ -51,8 +29,6 @@ function handlePlaceClick(event) {
 }
 
 function renderPlaces(places) {
-  const $placeDetailsContainer = document.querySelector(".place-details");
-
   places
     .sort((a, b) => {
       return b.rating - a.rating;
@@ -71,6 +47,7 @@ function renderPlaces(places) {
     });
 
   $placeDetailsContainer.addEventListener("click", handlePlaceClick);
+  toggleShowPlaces();
 }
 
 export function initPlacesService(map) {

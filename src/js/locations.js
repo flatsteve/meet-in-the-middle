@@ -1,4 +1,4 @@
-import { insertMarker, showMeetingPoint, setMapCenter } from "./map";
+import { insertMarker, showMiddlePoint, setMapCenter } from "./map";
 import { LOCATION_INPUTS_INITIAL_VALUES } from "./constants";
 
 let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
@@ -56,7 +56,7 @@ export function getMeetingPoint() {
     bounds.extend(locationInputs[input].coordinates);
   }
 
-  showMeetingPoint(bounds);
+  showMiddlePoint(bounds);
 }
 
 /*
@@ -64,12 +64,12 @@ export function getMeetingPoint() {
   get the lat lng to insert a marker - also clears any previous marker
 */
 function handleAddressSelected(inputId) {
+  let title;
+  let markerColour;
   const place = locationInputs[inputId].ref.getPlace().geometry.location;
-
   const lat = place.lat();
   const lng = place.lng();
   const coordinates = { lat, lng };
-  let title, markerColour;
 
   if (inputId === "yourLocation") {
     title = "Your Location";

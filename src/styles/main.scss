@@ -1,5 +1,9 @@
 @import "./colours";
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   background-color: $white;
@@ -12,4 +16,5 @@ body {
 .container {
   margin: 0 auto;
   max-width: 65rem;
+  position: relative;
 }

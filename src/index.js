@@ -1,7 +1,6 @@
-import { initMap } from "./map";
-import { initLocationsAutocomplete } from "./locations";
-import { initPlacesService, testPlaces } from "./places";
-import { getMeetingPoint } from "./locations";
+import { initMap } from "./js/map";
+import { initLocationsAutocomplete } from "./js/locations";
+import { initPlacesService, testPlaces } from "./js/places";
 
 import "./styles.scss";
 
@@ -14,7 +13,3 @@ const map = initMap();
 initLocationsAutocomplete();
 initPlacesService(map);
 // testPlaces();
-
-// TODO Move to controls file?
-const meetButton = document.getElementById("meet");
-meetButton.addEventListener("click", getMeetingPoint);

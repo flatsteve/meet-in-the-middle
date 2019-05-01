@@ -48,14 +48,22 @@ export function setMapCenter(geoLocation) {
   map.setCenter(geoLocation);
 }
 
-export function showMeetingPoint(bounds) {
+export function showMiddlePoint(bounds) {
   const centerPoint = bounds.getCenter();
-  insertMarker(centerPoint, {
+
+  const centerPointMarker = insertMarker(centerPoint, {
     recenter: false,
     animation: "BOUNCE",
     title: "The middle!",
     markerColour: "blue"
   });
+
   map.fitBounds(bounds);
+
   showNearbyPlaces(centerPoint);
+
+  // Stop the middle point marker from bouncing after 3 seconds
+  setTimeout(() => {
+    centerPointMarker.setAnimation(null);
+  }, 3000);
 }
