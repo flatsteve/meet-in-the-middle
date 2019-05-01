@@ -8,7 +8,6 @@ if (module.hot) {
   module.hot.accept();
 }
 
-// Initialize all services
 const map = initMap();
 initLocationsAutocomplete();
 initPlacesService(map);

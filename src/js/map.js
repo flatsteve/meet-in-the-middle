@@ -53,7 +53,11 @@ export function clearMarkers() {
   });
 }
 
-export function setMapCenter(geoLocation) {
+export function setMapCenter(geoLocation, { pan = false } = {}) {
+  if (pan) {
+    return map.panTo(geoLocation);
+  }
+
   map.setCenter(geoLocation);
 }
 

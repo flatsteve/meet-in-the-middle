@@ -1,4 +1,4 @@
-import { insertMarker } from "./map";
+import { insertMarker, setMapCenter } from "./map";
 import {
   buildPlaceTemplate,
   $placeDetailsContainer,
@@ -7,24 +7,22 @@ import {
 import { placeResults } from "../../__fixtures__/places";
 
 let placesService;
-let currentPlaces = {};
-
-/*
-  Resets any marker animations back to null
-*/
-function resetCurrentPlaceMarkers() {
-  for (let key in currentPlaces) {
-    currentPlaces[key].setAnimation(null);
-  }
-}
+let currentPlacesMarkers = {};
+let lastPlacesMarkerSelected;
 
 function handlePlaceClick(event) {
-  resetCurrentPlaceMarkers();
-
   const placeId = event.target.parentNode.dataset.id;
 
+  if (lastPlacesMarkerSelected) {
+    lastPlacesMarkerSelected.setAnimation(null);
+  }
+
   if (placeId) {
-    currentPlaces[placeId].setAnimation(google.maps.Animation.BOUNCE);
+    const marker = currentPlacesMarkers[placeId];
+
+    lastPlacesMarkerSelected = marker;
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setMapCenter(marker.position, { pan: true });
   }
 }
 
@@ -43,7 +41,7 @@ function renderPlaces(places) {
         buildPlaceTemplate(placeResult)
       );
 
-      currentPlaces[placeResult.id] = marker;
+      currentPlacesMarkers[placeResult.id] = marker;
     });
 
   $placeDetailsContainer.addEventListener("click", handlePlaceClick);
