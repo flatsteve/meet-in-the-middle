@@ -75,7 +75,8 @@ input:focus {
 @media (max-width: 768px) {
   .locations {
     flex-wrap: wrap;
-    justify-content: center; }
+    justify-content: center;
+    margin-top: 1.25rem; }
   input {
     margin-bottom: 1.25rem;
     width: 100%; } }
