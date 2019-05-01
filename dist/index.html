@@ -11,8 +11,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
       rel="stylesheet"
     />
-    <link href="styles.css" rel="stylesheet" />
-  </head>
+  <link href="styles.css" rel="stylesheet"></head>
 
   <body>
     <div id="map"></div>
@@ -40,16 +39,21 @@
             />
           </div>
 
-          <button id="meet" type="button">Meet in the Middle!</button>
+          <button id="meet" class="button" type="button">
+            Meet in the Middle!
+          </button>
         </div>
       </form>
 
       <div class="places">
-        <button class="search-again" type="button">Search again</button>
+        <div class="places__results"></div>
+
+        <button class="button button--link search-again" type="button">
+          Search again
+        </button>
       </div>
     </div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPKf9z8oFE2CcLeK5_SW1gFWqwBTY91g8&libraries=places"></script>
-    <script type="text/javascript" src="main.js"></script>
-  </body>
+  <script type="text/javascript" src="main.js"></script></body>
 </html>
