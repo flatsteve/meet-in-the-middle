@@ -1,4 +1,5 @@
 import { getMeetingPoint } from "./locations";
+import { resetPlaces } from "./places";
 import { clearMarkers } from "./map";
 
 export const $placesResults = document.querySelector(".places__results");
@@ -28,6 +29,12 @@ function getPlacePhoto(place) {
   return '<div class="place__image"><p>No image found</p></div>';
 }
 
+function resetUI() {
+  clearMarkers();
+  resetPlaces();
+  $locationsForm.reset();
+}
+
 export function buildPlaceTemplate(place) {
   return `
     <div class="place" data-id="${place.id}">
@@ -45,8 +52,8 @@ export function toggleShowPlaces() {
     $locationsContainer.classList.remove("locations--hide");
     $placesContainer.classList.remove("places--show");
     uiState.placesShown = false;
-    clearMarkers();
-    $locationsForm.reset();
+
+    resetUI();
   } else {
     $locationsContainer.classList.add("locations--hide");
     $placesContainer.classList.add("places--show");

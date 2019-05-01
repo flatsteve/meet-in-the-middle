@@ -11,4 +11,4 @@ if (module.hot) {
 const map = initMap();
 initLocationsAutocomplete();
 initPlacesService(map);
-// testPlaces();
+testPlaces();

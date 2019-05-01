@@ -63,6 +63,12 @@ export function showNearbyPlaces(location, { type = "restaurant" } = {}) {
   });
 }
 
+export function resetPlaces() {
+  lastPlacesMarkerSelected = null;
+  currentPlacesMarkers = {};
+  $placesResults.innerHTML = "";
+}
+
 export function testPlaces() {
   renderPlaces(placeResults);
 }
