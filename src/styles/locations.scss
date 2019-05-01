@@ -1,10 +1,13 @@
 @import "./colours";
+@import "./responsive";
 
 .locations {
   align-items: center;
   display: flex;
-  justify-content: space-between;
-  margin: 2.5rem 0;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 1.25rem 0 2.5rem 0;
   opacity: 1;
   padding: 0 1.25rem;
   position: absolute;
@@ -15,6 +18,17 @@
   &--hide {
     opacity: 0;
     z-index: -1;
+  }
+
+  @include wider($tablet) {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2.5rem 0;
+
+    input {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -27,6 +41,7 @@ input {
   border: 2px solid $blue;
   border-radius: 0.5rem;
   font-size: 1rem;
+  margin-bottom: 1.25rem;
   min-width: 14rem;
   padding: 0.75rem;
   transition: border 0.3s ease-in;
@@ -40,17 +55,4 @@ input:focus {
 ::placeholder {
   color: $grey;
   font-style: italic;
-}
-
-@media (max-width: 768px) {
-  .locations {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 1.25rem;
-  }
-
-  input {
-    margin-bottom: 1.25rem;
-    width: 100%;
-  }
 }

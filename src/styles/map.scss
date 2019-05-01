@@ -1,6 +1,11 @@
 @import "./colours";
+@import "./responsive";
 
 #map {
   border-bottom: 2px solid $blue;
-  height: 65vh;
+  height: 50vh;
+
+  @include wider($tablet) {
+    height: 65vh;
+  }
 }

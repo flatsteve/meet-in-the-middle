@@ -1,0 +1,19 @@
+$mobile-modern: 375px;
+$mobile-landscape: 480px;
+$tablet: 768px;
+$tablet-large: 960px;
+$desktop: 1200px;
+$desktop-large: 1360px;
+$wide-screen: 1400px;
+
+@mixin wider($width) {
+  @media (min-width: #{$width}) {
+    @content;
+  }
+}
+
+@mixin narrower($width) {
+  @media (max-width: #{$width}) {
+    @content;
+  }
+}
