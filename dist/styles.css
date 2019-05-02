@@ -16,18 +16,25 @@ body {
 .button {
   background-color: #6564a6;
   border: none;
+  box-shadow: 0 0.1rem 0.25rem 0 rgba(145, 134, 149, 0.5);
   color: #ffffff;
   border-radius: 0.5rem;
   font-size: 1rem;
   padding: 1.25rem;
   transition: all 0.3s ease-in; }
   .button:hover {
+    box-shadow: none;
     cursor: pointer;
     background-color: #464578; }
   .button:focus {
     outline: none; }
+  .button:disabled {
+    background-color: #918695;
+    box-shadow: none;
+    cursor: not-allowed; }
   .button--link {
     background-color: #fff;
+    box-shadow: none;
     color: #6564a6; }
     .button--link:hover {
       background-color: #fff;
