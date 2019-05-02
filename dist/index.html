@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="./assets/favicon.png">
 
     <title>Meet in the Middle</title>
 
@@ -17,32 +18,30 @@
     <div id="map"></div>
 
     <div class="container">
-      <form id="locations-form">
-        <div class="locations">
-          <div>
-            <label for="yourLocation">Your location</label>
+      <form id="locations-form" class="locations">
+        <div>
+          <label for="yourLocation">Your location</label>
 
-            <input
-              type="text"
-              id="yourLocation"
-              placeholder="e.g. 17 Cherry Tree Lane"
-            />
-          </div>
-
-          <div>
-            <label for="theirLocation">Their location</label>
-
-            <input
-              type="text"
-              id="theirLocation"
-              placeholder="e.g. 221B Baker St"
-            />
-          </div>
-
-          <button id="meet" class="button" type="button" disabled="disabled">
-            Meet in the Middle!
-          </button>
+          <input
+            type="text"
+            id="yourLocation"
+            placeholder="e.g. 17 Cherry Tree Lane"
+          />
         </div>
+
+        <div>
+          <label for="theirLocation">Their location</label>
+
+          <input
+            type="text"
+            id="theirLocation"
+            placeholder="e.g. 221B Baker St"
+          />
+        </div>
+
+        <button id="meet" class="button" type="button" disabled="disabled">
+          Meet in the Middle!
+        </button>
       </form>
 
       <div class="places">
@@ -52,7 +51,29 @@
           Search again
         </button>
       </div>
+
+      <div class="welcome">
+        <h1>Meet in the Middle!</h1>
+
+        <h3>
+          Get suggestions on places to go out that are convenient for everyone!
+        </h3>
+
+        <p>
+          Do you ever plan to meet up with friends and they suggest somewhere
+          two minutes from their house that would take you three tube lines and
+          a train to get to? Never fear, let Meet in the Middle suggest the best
+          spots that everyone can get too without losing the will to live 😝
+        </p>
+      </div>
     </div>
+
+    <footer>
+      <div class="container">
+        <small>Made with 🍻 by <a href="https://flatsteve.com/">FlatSteve</a></small></br>
+        <small>© FlatSteve 2019, no rights reserved</small>
+      </div>
+    </footer>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPKf9z8oFE2CcLeK5_SW1gFWqwBTY91g8&libraries=places"></script>
   <script type="text/javascript" src="main.js"></script></body>

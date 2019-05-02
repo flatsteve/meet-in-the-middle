@@ -11,6 +11,7 @@ body {
 .container {
   margin: 0 auto;
   max-width: 65rem;
+  padding: 1.25rem;
   position: relative; }
 
 .button {
@@ -53,28 +54,27 @@ body {
   justify-content: center;
   flex-direction: column;
   flex-wrap: wrap;
-  margin: 1.25rem 0 2.5rem 0;
+  height: auto;
   opacity: 1;
-  padding: 0 1.25rem;
-  position: absolute;
   transition: all 0.3s ease-in;
   width: 100%;
   z-index: 1; }
   .locations--hide {
+    height: 0;
     opacity: 0;
     z-index: -1; }
   @media (min-width: 768px) {
     .locations {
+      align-items: flex-end;
       flex-wrap: nowrap;
       flex-direction: row;
-      justify-content: space-between;
-      margin: 2.5rem 0; }
+      justify-content: space-between; }
       .locations input {
         margin-bottom: 0; } }
 
 label {
   display: block;
-  margin-bottom: 0.25rem; }
+  margin: 1.25rem 0 0.25rem; }
 
 input {
   border: 2px solid #60add3;
@@ -94,11 +94,12 @@ input:focus {
   font-style: italic; }
 
 .places {
-  margin: 0.75rem 1.25rem 2.5rem;
+  height: 0;
   opacity: 0;
   transition: all 0.3s ease-in;
   z-index: -1; }
   .places--show {
+    height: auto;
     opacity: 1;
     z-index: 1; }
   .places__results {
@@ -134,4 +135,14 @@ input:focus {
 .search-again {
   display: flex;
   margin: 0 auto; }
+
+.welcome {
+  margin: 5rem 0; }
+
+footer {
+  background-color: #60add3;
+  color: #fff;
+  text-align: center; }
+  footer a {
+    color: #fff; }
 
