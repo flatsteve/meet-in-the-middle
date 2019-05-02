@@ -1,6 +1,7 @@
 .button {
   background-color: $purple;
   border: none;
+  box-shadow: 0 0.1rem 0.25rem 0 rgba($grey, 0.5);
   color: #ffffff;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -8,6 +9,7 @@
   transition: all 0.3s ease-in;
 
   &:hover {
+    box-shadow: none;
     cursor: pointer;
     background-color: darken($purple, 15%);
   }
@@ -16,8 +18,15 @@
     outline: none;
   }
 
+  &:disabled {
+    background-color: $grey;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
   &--link {
     background-color: $white;
+    box-shadow: none;
     color: $purple;
 
     &:hover {

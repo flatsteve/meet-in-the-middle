@@ -1,4 +1,5 @@
 import { insertMarker, showMiddlePoint, setMapCenter } from "./map";
+import { toggleMeetButtonDisabled } from "./ui";
 import { LOCATION_INPUTS_INITIAL_VALUES } from "./constants";
 
 let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
@@ -25,7 +26,8 @@ const getGeoLocation = new Promise(resolve => {
       () => {
         // User may have blocked location
         resolve(null);
-      }
+      },
+      { timeout: 10000 }
     );
   } else {
     resolve(null);
@@ -66,6 +68,7 @@ export function getMeetingPoint() {
 function handleAddressSelected(inputId) {
   let title;
   let markerColour;
+
   const place = locationInputs[inputId].ref.getPlace().geometry.location;
   const lat = place.lat();
   const lng = place.lng();
@@ -89,6 +92,10 @@ function handleAddressSelected(inputId) {
     title,
     markerColour
   });
+
+  if (isLocationsComplete()) {
+    toggleMeetButtonDisabled();
+  }
 }
 
 /*
@@ -106,4 +113,14 @@ function createAutocompleteInput({ inputId, bounds }) {
   input.addListener("place_changed", () => handleAddressSelected(inputId));
 
   return input;
+}
+
+function isLocationsComplete() {
+  for (let inputKey in locationInputs) {
+    if (!locationInputs[inputKey].coordinates) {
+      return false;
+    }
+  }
+
+  return true;
 }

@@ -10,7 +10,8 @@ const $meetButton = document.getElementById("meet");
 const $searchAgainButton = document.querySelector(".search-again");
 
 let uiState = {
-  placesShown: false
+  placesShown: false,
+  meetButtonDisabled: true
 };
 
 function getPlacePhoto(place) {
@@ -33,6 +34,7 @@ function resetUI() {
   clearMarkers();
   resetPlaces();
   $locationsForm.reset();
+  toggleMeetButtonDisabled();
 }
 
 export function buildPlaceTemplate(place) {
@@ -45,6 +47,16 @@ export function buildPlaceTemplate(place) {
       <p>Rating: ${place.rating}</p>
     </div>
   `;
+}
+
+export function toggleMeetButtonDisabled() {
+  if (uiState.meetButtonDisabled) {
+    $meetButton.disabled = false;
+    uiState.meetButtonDisabled = false;
+  } else {
+    $meetButton.disabled = true;
+    uiState.meetButtonDisabled = true;
+  }
 }
 
 export function toggleShowPlaces() {
