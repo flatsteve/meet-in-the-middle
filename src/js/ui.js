@@ -30,6 +30,26 @@ function getPlacePhoto(place) {
   return '<div class="place__image"><p>No image found</p></div>';
 }
 
+function getPriceLevel(place) {
+  if (!place.price_level) {
+    return "Unknown";
+  }
+
+  const prices = [];
+
+  for (let i = 0; i < place.price_level; i++) {
+    prices.push("£");
+  }
+
+  return prices.join("");
+}
+
+function getPlaceMapURL(place) {
+  return `https://www.google.com/maps/search/?api=1&query=${
+    place.name
+  }&query_place_id=${place.place_id}`;
+}
+
 function resetUI() {
   clearMarkers();
   resetPlaces();
@@ -43,8 +63,12 @@ export function buildPlaceTemplate(place) {
       ${getPlacePhoto(place)}
 
       <h3 class="place__title">${place.name}</h3>
+      <p>Rating: ${place.rating} (${place.user_ratings_total})</p>
+      <p>Price: ${getPriceLevel(place)}</p>
       <p class="place__address">${place.vicinity}</p>
-      <p>Rating: ${place.rating}</p>
+      <a href="${getPlaceMapURL(place)}" target="_blank">
+        Open in Google Maps
+      </a>
     </div>
   `;
 }

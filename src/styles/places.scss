@@ -21,6 +21,7 @@ $place-size: 16rem;
 .place {
   margin-right: 1.25rem;
   min-width: $place-size;
+  padding-bottom: 1.25rem;
 
   &:hover {
     cursor: pointer;
@@ -55,6 +56,11 @@ $place-size: 16rem;
     p {
       color: $white;
     }
+  }
+
+  a {
+    color: $blue;
+    text-decoration: none;
   }
 }
 

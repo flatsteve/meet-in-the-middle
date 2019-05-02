@@ -515,6 +515,7 @@ export const placeResults = [
     icon: "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
     id: "7335428949b9f7e65f966fd9db2add16832671aa",
     name: "Farmstand Central Kitchen",
+    price_level: 3,
     opening_hours: {
       open_now: true
     },
