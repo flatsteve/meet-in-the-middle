@@ -351,7 +351,7 @@ body {
   height: 50vh; }
   @media (min-width: 768px) {
     #map {
-      height: 65vh; } }
+      height: 60vh; } }
 
 .locations {
   align-items: center;
@@ -413,7 +413,8 @@ input:focus {
 
 .place {
   margin-right: 1.25rem;
-  min-width: 16rem; }
+  min-width: 16rem;
+  padding-bottom: 1.25rem; }
   .place:hover {
     cursor: pointer; }
   .place__title, .place__address {
@@ -436,6 +437,9 @@ input:focus {
     width: 16rem; }
     .place__image p {
       color: #fff; }
+  .place a {
+    color: #60add3;
+    text-decoration: none; }
 
 .search-again {
   display: flex;
