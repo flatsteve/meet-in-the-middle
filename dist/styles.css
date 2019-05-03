@@ -419,6 +419,9 @@ input:focus {
   .locations .form-group {
     margin: 0.5rem 0;
     width: 100%; }
+  .locations__error {
+    color: #e74c3c;
+    margin-top: 0.25rem; }
   @media (min-width: 480px) {
     .locations {
       max-width: 24rem;
