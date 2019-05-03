@@ -1,0 +1,31 @@
+@import "./responsive";
+
+html {
+  font-size: 85%;
+
+  @include wider($mobile-modern) {
+    font-size: 90%;
+  }
+
+  @include wider($tablet) {
+    font-size: 95%;
+  }
+
+  @include wider($desktop) {
+    font-size: 100%;
+  }
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 300;
+}

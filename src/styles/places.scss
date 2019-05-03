@@ -1,3 +1,5 @@
+@import "./responsive";
+
 $place-size: 16rem;
 
 .places {
@@ -19,9 +21,13 @@ $place-size: 16rem;
 }
 
 .place {
-  margin-right: 1.25rem;
+  margin-right: 0.75rem;
   min-width: $place-size;
   padding-bottom: 1.25rem;
+
+  @include wider($tablet) {
+    margin-right: 1.25rem;
+  }
 
   &:hover {
     cursor: pointer;
@@ -39,7 +45,7 @@ $place-size: 16rem;
   }
 
   p {
-    margin: 0.5rem 0;
+    margin: 0.25rem 0;
   }
 
   &__image {

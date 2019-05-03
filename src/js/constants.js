@@ -4,6 +4,8 @@ export const MAP_CONFIG = {
   center: CENTRAL_LND_COORDS,
   mapTypeControl: false,
   gestureHandling: "greedy",
+  fullscreenControl: false,
+  streetViewControl: false,
   zoom: 12
 };
 

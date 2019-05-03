@@ -2,7 +2,6 @@
 @import "./responsive";
 
 #map {
-  border-bottom: 2px solid $blue;
   height: 50vh;
 
   @include wider($tablet) {
