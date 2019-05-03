@@ -1,5 +1,10 @@
 import { insertMarker, setMapCenter } from "./map";
-import { buildPlaceTemplate, $placesResults, toggleShowPlaces } from "./ui";
+import {
+  buildPlaceTemplate,
+  $placesResults,
+  toggleShowPlaces,
+  showLocationsError
+} from "./ui";
 import { placeResults } from "../../__fixtures__/places";
 
 let placesService;
@@ -57,7 +62,13 @@ export function showNearbyPlaces(location, { type = "restaurant" } = {}) {
   };
 
   placesService.nearbySearch(request, (results, status) => {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
+    if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+      showLocationsError(
+        "Sorry we couldn't find anywhere nearby, please try searching again..."
+      );
+    }
+
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
       renderPlaces(results);
     }
   });

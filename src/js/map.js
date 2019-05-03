@@ -73,6 +73,8 @@ export function showMiddlePoint(bounds) {
 
   map.fitBounds(bounds);
 
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
   showNearbyPlaces(centerPoint);
 
   // Stop the middle point marker from bouncing after 3 seconds

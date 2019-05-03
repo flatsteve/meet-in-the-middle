@@ -1,5 +1,5 @@
 import { insertMarker, showMiddlePoint, setMapCenter } from "./map";
-import { toggleMeetButtonDisabled } from "./ui";
+import { toggleMeetButtonDisabled, hideLocationsError } from "./ui";
 import { LOCATION_INPUTS_INITIAL_VALUES, TABLET_WIDTH } from "./constants";
 
 let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
@@ -51,7 +51,10 @@ export async function initLocationsAutocomplete() {
 /*
   Meet in the Middle was clicked
 */
-export function getMeetingPoint() {
+export function handleMeetButtonClicked() {
+  // Clear any previous errors getting the meeting point
+  hideLocationsError();
+
   let bounds = new google.maps.LatLngBounds();
 
   for (let input in locationInputs) {

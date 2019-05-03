@@ -1,4 +1,4 @@
-import { getMeetingPoint } from "./locations";
+import { handleMeetButtonClicked } from "./locations";
 import { resetPlaces } from "./places";
 import { clearMarkers } from "./map";
 
@@ -73,6 +73,21 @@ export function buildPlaceTemplate(place) {
   `;
 }
 
+export function hideLocationsError() {
+  const errorMessage = document.querySelector(".locations__error");
+
+  if (document.querySelector(".locations__error")) {
+    errorMessage.parentElement.removeChild(errorMessage);
+  }
+}
+
+export function showLocationsError(message) {
+  $locationsContainer.insertAdjacentHTML(
+    "beforebegin",
+    `<p class="locations__error">${message}</p>`
+  );
+}
+
 export function toggleMeetButtonDisabled() {
   if (uiState.meetButtonDisabled) {
     $meetButton.disabled = false;
@@ -97,5 +112,5 @@ export function toggleShowPlaces() {
   }
 }
 
-$meetButton.addEventListener("click", getMeetingPoint);
+$meetButton.addEventListener("click", handleMeetButtonClicked);
 $searchAgainButton.addEventListener("click", toggleShowPlaces);
