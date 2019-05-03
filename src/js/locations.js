@@ -1,6 +1,6 @@
 import { insertMarker, showMiddlePoint, setMapCenter } from "./map";
 import { toggleMeetButtonDisabled } from "./ui";
-import { LOCATION_INPUTS_INITIAL_VALUES } from "./constants";
+import { LOCATION_INPUTS_INITIAL_VALUES, TABLET_WIDTH } from "./constants";
 
 let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
 
@@ -98,21 +98,36 @@ function handleAddressSelected(inputId) {
   }
 }
 
+function handleInputFocus(inputElement) {
+  if (window.innerWidth < TABLET_WIDTH) {
+    window.scrollTo({
+      top: inputElement.offsetTop,
+      left: 0,
+      behavior: "smooth"
+    });
+  }
+}
+
 /*
   Creates a new autocomplete location input and binds the handleAddressSelected 
   function to fire when user selects a location - note that we only need the geometry
   of the selected place
 */
 function createAutocompleteInput({ inputId, bounds }) {
-  let input = new google.maps.places.Autocomplete(
-    document.getElementById(inputId),
-    { bounds, types: ["geocode"] }
+  const inputElement = document.getElementById(inputId);
+  inputElement.addEventListener("focus", () => handleInputFocus(inputElement));
+
+  const inputAutocomplete = new google.maps.places.Autocomplete(inputElement, {
+    bounds,
+    types: ["geocode"]
+  });
+
+  inputAutocomplete.setFields(["geometry"]);
+  inputAutocomplete.addListener("place_changed", () =>
+    handleAddressSelected(inputId)
   );
 
-  input.setFields(["geometry"]);
-  input.addListener("place_changed", () => handleAddressSelected(inputId));
-
-  return input;
+  return inputAutocomplete;
 }
 
 function isLocationsComplete() {
