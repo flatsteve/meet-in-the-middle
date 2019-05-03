@@ -308,9 +308,7 @@ template {
 
 html,
 body {
-  background-color: #fff;
-  height: 100%;
-  overflow-x: hidden; }
+  background-color: #fff; }
 
 .container {
   margin: 0 auto;
@@ -414,6 +412,7 @@ input:focus {
   .locations--hide {
     height: 0;
     opacity: 0;
+    overflow-y: hidden;
     z-index: -1; }
   .locations .button {
     margin-top: 1.25rem; }
