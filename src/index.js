@@ -9,6 +9,6 @@ if (module.hot) {
 }
 
 const map = initMap();
-initLocationsAutocomplete();
 initPlacesService(map);
+initLocationsAutocomplete();
 // testPlaces();

@@ -19,39 +19,35 @@
     z-index: -1;
   }
 
+  .button {
+    margin-top: 1.25rem;
+  }
+
+  .form-group {
+    margin: 0.5rem 0;
+    width: 100%;
+  }
+
+  @include wider($mobile-landscape) {
+    max-width: 24rem;
+    margin: 0 auto;
+  }
+
   @include wider($tablet) {
     align-items: flex-end;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
+    max-width: none;
+
+    .form-group {
+      margin-bottom: 0;
+      width: auto;
+    }
 
     input {
       margin-bottom: 0;
+      width: auto;
     }
   }
-}
-
-label {
-  display: block;
-  margin: 1.25rem 0 0.25rem;
-}
-
-input {
-  border: 2px solid $blue;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  margin-bottom: 1.25rem;
-  min-width: 14rem;
-  padding: 0.75rem;
-  transition: border 0.3s ease-in;
-}
-
-input:focus {
-  border-color: darken($blue, 15%);
-  outline: none;
-}
-
-::placeholder {
-  color: $grey;
-  font-style: italic;
 }

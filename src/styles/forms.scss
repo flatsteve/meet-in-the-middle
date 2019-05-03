@@ -1,0 +1,25 @@
+@import "./colours";
+
+::placeholder {
+  color: darken($grey, 10%);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+input {
+  background-color: lighten($grey, 40%);
+  border: none;
+  font-size: 1rem;
+  min-width: 14rem;
+  padding: 0.75rem;
+  transition: border 0.3s ease-in;
+  width: 100%;
+}
+
+input:focus {
+  border-color: darken($blue, 15%);
+  outline: none;
+}

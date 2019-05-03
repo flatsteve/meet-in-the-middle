@@ -19,8 +19,9 @@
   }
 
   &:disabled {
-    background-color: $grey;
+    background-color: lighten($grey, 25%);
     box-shadow: none;
+    color: $grey;
     cursor: not-allowed;
   }
 

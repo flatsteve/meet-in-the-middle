@@ -17,9 +17,10 @@ html {
 }
 
 body {
+  color: darken($grey, 25%);
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 h1,
