@@ -2,7 +2,8 @@ import { handleMeetButtonClicked } from "./locations";
 import { resetPlaces } from "./places";
 import { clearMarkers } from "./map";
 
-import star from "../images/full-star.svg";
+import fullStar from "../images/full-star.svg";
+import emptyStar from "../images/empty-star.svg";
 
 export const $placesResults = document.querySelector(".places__results");
 const $placesContainer = document.querySelector(".places");
@@ -52,10 +53,15 @@ function getPlaceMapURL(place) {
 }
 
 function getPlaceStarts(rating) {
+  const RATING_TOTAL = 5;
   const stars = [];
 
-  for (let i = 0; i < rating; i++) {
-    stars.push(star);
+  for (let i = 1; i <= RATING_TOTAL; i++) {
+    if (i <= rating) {
+      stars.push(fullStar);
+    } else {
+      stars.push(emptyStar);
+    }
   }
 
   return stars.join("");
@@ -74,9 +80,18 @@ export function buildPlaceTemplate(place) {
       ${getPlacePhoto(place)}
 
       <h3 class="place__title">${place.name}</h3>
-      <p class="place__rating"> 
-        ${place.rating} ${getPlaceStarts(place.rating)} 
-        (${place.user_ratings_total}), <strong>${getPriceLevel(place)}</strong>
+      <p class="place__details"> 
+        <span class="place__rating">
+          ${place.rating} 
+          <span class="place__rating__stars">
+            ${getPlaceStarts(place.rating)}
+          </span> 
+          (${place.user_ratings_total}) 
+        </span>
+        
+        <span class="place__price">
+          <strong>${getPriceLevel(place)}</strong>
+        </span>
       </p>
       <p class="place__address">${place.vicinity}</p>
       <a href="${getPlaceMapURL(place)}" target="_blank">
