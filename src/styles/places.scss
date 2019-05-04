@@ -44,6 +44,16 @@ $place-size: 16rem;
     margin: 0.5rem 0 0;
   }
 
+  &__rating {
+    align-items: center;
+    display: flex;
+
+    svg {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+
   p {
     margin: 0.25rem 0;
   }
