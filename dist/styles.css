@@ -468,6 +468,22 @@ input:focus {
     white-space: nowrap; }
   .place__title {
     margin: 0.5rem 0 0; }
+  .place__details {
+    align-items: center;
+    display: flex;
+    white-space: nowrap; }
+  .place__rating {
+    align-items: center;
+    display: flex; }
+    .place__rating__stars {
+      display: block;
+      margin: 0 0.25rem; }
+    .place__rating svg {
+      height: 1rem;
+      width: 1rem; }
+  .place__price {
+    display: block;
+    margin-left: 0.75rem; }
   .place p {
     margin: 0.25rem 0; }
   .place__image {
