@@ -1,5 +1,5 @@
 import { insertMarker, showMiddlePoint, setMapCenter } from "./map";
-import { toggleMeetButtonDisabled, hideLocationsError } from "./ui";
+import { hideLocationsError, setMeetButtonDisabled } from "./ui";
 import { LOCATION_INPUTS_INITIAL_VALUES, TABLET_WIDTH } from "./constants";
 
 let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
@@ -97,7 +97,7 @@ function handleAddressSelected(inputId) {
   });
 
   if (isLocationsComplete()) {
-    toggleMeetButtonDisabled();
+    setMeetButtonDisabled(false);
   }
 }
 
