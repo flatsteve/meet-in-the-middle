@@ -1,5 +1,5 @@
 import { handleMeetButtonClicked } from "./locations";
-import { resetPlaces } from "./places";
+import { resetPlaces, handlePlaceClick } from "./places";
 import { clearMarkers } from "./map";
 
 import fullStar from "../images/full-star.svg";
@@ -86,6 +86,21 @@ function resetUI() {
   resetPlaces();
   $locationsForm.reset();
   setMeetButtonDisabled(true);
+}
+
+export function handlePlaceMarkerClick(place) {
+  const placeId = place.id;
+
+  const $placeResult = $placesResults.querySelector(`[data-id="${placeId}"]`);
+  const placeResultsMid = $placesResults.clientWidth / 2;
+
+  $placesResults.scrollTo({
+    top: 0,
+    left: $placeResult.offsetLeft - placeResultsMid,
+    behavior: "smooth"
+  });
+
+  handlePlaceClick(null, { placeId });
 }
 
 export function buildPlaceTemplate(place) {

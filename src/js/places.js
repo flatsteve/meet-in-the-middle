@@ -1,6 +1,7 @@
 import { insertMarker, setMapCenter } from "./map";
 import {
   buildPlaceTemplate,
+  handlePlaceMarkerClick,
   $placesResults,
   toggleShowPlaces,
   showLocationsError
@@ -11,20 +12,22 @@ let placesService;
 let currentPlacesMarkers = {};
 let lastPlacesMarkerSelected;
 
-function handlePlaceClick(event) {
-  const placeId = event.target.parentNode.dataset.id;
+export function handlePlaceClick(event, { placeId = false } = {}) {
+  // Place id can be passed in by clicking the marker however a place
+  // can also be clicked from the results list
+  if (!placeId) {
+    placeId = event.target.parentNode.dataset.id;
+  }
 
   if (lastPlacesMarkerSelected) {
     lastPlacesMarkerSelected.setAnimation(null);
   }
 
-  if (placeId) {
-    const marker = currentPlacesMarkers[placeId];
+  const marker = currentPlacesMarkers[placeId];
 
-    lastPlacesMarkerSelected = marker;
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-    setMapCenter(marker.position, { pan: true });
-  }
+  lastPlacesMarkerSelected = marker;
+  marker.setAnimation(google.maps.Animation.BOUNCE);
+  setMapCenter(marker.position, { pan: true });
 }
 
 function renderPlaces(places) {
@@ -41,6 +44,8 @@ function renderPlaces(places) {
         "beforeend",
         buildPlaceTemplate(placeResult)
       );
+
+      marker.addListener("click", () => handlePlaceMarkerClick(placeResult));
 
       currentPlacesMarkers[placeResult.id] = marker;
     });
