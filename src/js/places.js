@@ -1,21 +1,20 @@
+import { map } from "../index";
 import { insertMarker, setMapCenter } from "./map";
 import {
   buildPlaceTemplate,
   $placesResults,
+  scrollToHighlightedPlace,
   setHighlightedPlace,
   showLocationsError,
   toggleShowPlaces
 } from "./ui";
 import { placeResults } from "../../__fixtures__/places";
 
-let map;
 let placesService;
 let currentPlacesMarkers = {};
 let lastInfoWindowOpen;
 
-export function initPlacesService(map) {
-  map = map;
-
+export function initPlacesService() {
   placesService = new google.maps.places.PlacesService(map);
 }
 
@@ -33,24 +32,9 @@ export function handlePlaceClick(place, $placeResult) {
   infoWindow.open(map, marker);
   lastInfoWindowOpen = infoWindow;
 
+  scrollToHighlightedPlace($placeResult);
   setHighlightedPlace($placeResult);
   setMapCenter(marker.position, { pan: true });
-}
-
-function handlePlaceMarkerClick(place, $placeResult) {
-  const placesResultsMid = $placesResults.clientWidth / 2;
-  const placeResultMid = $placeResult.clientWidth / 2;
-  const MARGIN_OFFSET = 10;
-  const leftOffset =
-    $placeResult.offsetLeft - MARGIN_OFFSET - placesResultsMid + placeResultMid;
-
-  $placesResults.scrollTo({
-    top: 0,
-    left: leftOffset,
-    behavior: "smooth"
-  });
-
-  handlePlaceClick(place, $placeResult);
 }
 
 function renderPlaces(places) {
@@ -76,7 +60,7 @@ function renderPlaces(places) {
       );
 
       marker.addListener("click", () =>
-        handlePlaceMarkerClick(placeResult, $insertedPlaceResult)
+        handlePlaceClick(placeResult, $insertedPlaceResult)
       );
 
       currentPlacesMarkers[placeResult.id] = marker;

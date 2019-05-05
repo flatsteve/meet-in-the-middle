@@ -148,6 +148,20 @@ export function setHighlightedPlace($placeResult) {
   $placeResult.classList.add("place--highlighted");
 }
 
+export function scrollToHighlightedPlace($placeResult) {
+  const placesResultsMid = $placesResults.clientWidth / 2;
+  const placeResultMid = $placeResult.clientWidth / 2;
+  const MARGIN_OFFSET = 10;
+  const leftOffset =
+    $placeResult.offsetLeft - MARGIN_OFFSET - placesResultsMid + placeResultMid;
+
+  $placesResults.scrollTo({
+    top: 0,
+    left: leftOffset,
+    behavior: "smooth"
+  });
+}
+
 export function toggleShowPlaces() {
   if (uiState.placesShown) {
     $locationsContainer.classList.remove("locations--hide");

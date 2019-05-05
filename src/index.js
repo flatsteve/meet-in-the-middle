@@ -8,7 +8,7 @@ if (module.hot) {
   module.hot.accept();
 }
 
-const map = initMap();
-initPlacesService(map);
+export const map = initMap();
+initPlacesService();
 initLocationsAutocomplete();
-// testPlaces();
+testPlaces();
