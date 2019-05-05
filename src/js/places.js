@@ -8,25 +8,33 @@ import {
 } from "./ui";
 import { placeResults } from "../../__fixtures__/places";
 
+let map;
 let placesService;
 let currentPlacesMarkers = {};
-let lastPlacesMarkerSelected;
+let lastInfoWindowOpen;
 
-export function handlePlaceClick(event, { placeId = false } = {}) {
-  // Place id can be passed in by clicking the marker however a place
-  // can also be clicked from the results list
-  if (!placeId) {
-    placeId = event.target.parentNode.dataset.id;
+export function initPlacesService(map) {
+  map = map;
+
+  placesService = new google.maps.places.PlacesService(map);
+}
+
+export function handlePlaceClick(place, $placeResult) {
+  if (lastInfoWindowOpen) {
+    lastInfoWindowOpen.close();
   }
 
-  if (lastPlacesMarkerSelected) {
-    lastPlacesMarkerSelected.setAnimation(null);
-  }
+  $placeResult.classList.add("place--highlighted");
 
-  const marker = currentPlacesMarkers[placeId];
+  const marker = currentPlacesMarkers[place.id];
 
-  lastPlacesMarkerSelected = marker;
-  marker.setAnimation(google.maps.Animation.BOUNCE);
+  const infoWindow = new google.maps.InfoWindow({
+    content: place.name
+  });
+
+  infoWindow.open(map, marker);
+  lastInfoWindowOpen = infoWindow;
+
   setMapCenter(marker.position, { pan: true });
 }
 
@@ -37,7 +45,6 @@ function renderPlaces(places) {
     })
     .forEach(placeResult => {
       const placeLocation = placeResult.geometry.location;
-
       const marker = insertMarker(placeLocation, { title: placeResult.name });
 
       $placesResults.insertAdjacentHTML(
@@ -45,18 +52,22 @@ function renderPlaces(places) {
         buildPlaceTemplate(placeResult)
       );
 
-      marker.addListener("click", () => handlePlaceMarkerClick(placeResult));
+      const $insertedPlaceResult = $placesResults.querySelector(
+        `[data-id="${placeResult.id}"]`
+      );
+
+      $insertedPlaceResult.addEventListener("click", () =>
+        handlePlaceClick(placeResult, $insertedPlaceResult)
+      );
+
+      marker.addListener("click", () =>
+        handlePlaceMarkerClick(placeResult, $insertedPlaceResult)
+      );
 
       currentPlacesMarkers[placeResult.id] = marker;
     });
 
-  $placesResults.addEventListener("click", handlePlaceClick);
-
   toggleShowPlaces();
-}
-
-export function initPlacesService(map) {
-  placesService = new google.maps.places.PlacesService(map);
 }
 
 export function showNearbyPlaces(location, { type = "restaurant" } = {}) {
@@ -80,7 +91,7 @@ export function showNearbyPlaces(location, { type = "restaurant" } = {}) {
 }
 
 export function resetPlaces() {
-  lastPlacesMarkerSelected = null;
+  lastInfoWindowOpen = null;
   currentPlacesMarkers = {};
   $placesResults.innerHTML = "";
 }

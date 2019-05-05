@@ -2,6 +2,11 @@
 
 $place-size: 16rem;
 
+// Info window content
+.gm-style-iw-c {
+  font-weight: bold !important;
+}
+
 .places {
   height: 0; // Not shown by default
   opacity: 0;
@@ -31,6 +36,10 @@ $place-size: 16rem;
 
   &:hover {
     cursor: pointer;
+  }
+
+  &--highlighted {
+    background-color: pink;
   }
 
   &__title,

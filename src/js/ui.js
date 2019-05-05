@@ -88,10 +88,7 @@ function resetUI() {
   setMeetButtonDisabled(true);
 }
 
-export function handlePlaceMarkerClick(place) {
-  const placeId = place.id;
-
-  const $placeResult = $placesResults.querySelector(`[data-id="${placeId}"]`);
+export function handlePlaceMarkerClick(place, $placeResult) {
   const placeResultsMid = $placesResults.clientWidth / 2;
 
   $placesResults.scrollTo({
@@ -100,7 +97,7 @@ export function handlePlaceMarkerClick(place) {
     behavior: "smooth"
   });
 
-  handlePlaceClick(null, { placeId });
+  handlePlaceClick(place, $placeResult);
 }
 
 export function buildPlaceTemplate(place) {
