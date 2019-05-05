@@ -457,16 +457,19 @@ input:focus {
     overflow-y: hidden; }
 
 .place {
+  border-top: 0.25rem solid transparent;
   margin-right: 0.75rem;
   min-width: 16rem;
   padding-bottom: 1.25rem; }
+  .place:last-of-type {
+    margin-right: 0; }
   @media (min-width: 768px) {
     .place {
       margin-right: 1.25rem; } }
   .place:hover {
     cursor: pointer; }
   .place--highlighted {
-    background-color: pink; }
+    border-color: #6564a6; }
   .place__title, .place__address {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -496,7 +499,6 @@ input:focus {
     background-color: #dbd8dc;
     background-size: cover;
     background-position: top;
-    border-radius: 0.25rem;
     display: flex;
     justify-content: center;
     height: 10.66667rem;
