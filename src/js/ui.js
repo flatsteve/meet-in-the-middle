@@ -3,6 +3,7 @@ import { resetPlaces } from "./places";
 import { clearMarkers } from "./map";
 
 import fullStar from "../images/full-star.svg";
+import halfStar from "../images/half-star.svg";
 import emptyStar from "../images/empty-star.svg";
 
 export const $placesResults = document.querySelector(".places__results");
@@ -34,7 +35,7 @@ function getPlacePhoto(place) {
 
 function getPriceLevel(place) {
   if (!place.price_level) {
-    return "Unknown";
+    return "";
   }
 
   const prices = [];
@@ -55,6 +56,7 @@ function getPlaceMapURL(place) {
 function getPlaceStarts(rating) {
   const RATING_TOTAL = 5;
   const stars = [];
+  const remainder = Math.round((rating % 1) * 2) / 2;
 
   for (let i = 1; i <= RATING_TOTAL; i++) {
     if (i <= rating) {
@@ -62,6 +64,14 @@ function getPlaceStarts(rating) {
     } else {
       stars.push(emptyStar);
     }
+  }
+
+  if (remainder === 0.5) {
+    stars[Math.floor(rating)] = halfStar;
+  }
+
+  if (remainder === 1) {
+    stars[Math.floor(rating)] = fullStar;
   }
 
   return stars.join("");
@@ -82,7 +92,7 @@ export function buildPlaceTemplate(place) {
       <h3 class="place__title">${place.name}</h3>
       <p class="place__details"> 
         <span class="place__rating">
-          ${place.rating} 
+          <strong>${place.rating}</strong> 
           <span class="place__rating__stars">
             ${getPlaceStarts(place.rating)}
           </span> 
