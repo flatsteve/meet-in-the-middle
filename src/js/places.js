@@ -1,10 +1,10 @@
 import { insertMarker, setMapCenter } from "./map";
 import {
   buildPlaceTemplate,
-  handlePlaceMarkerClick,
   $placesResults,
-  toggleShowPlaces,
-  showLocationsError
+  setHighlightedPlace,
+  showLocationsError,
+  toggleShowPlaces
 } from "./ui";
 import { placeResults } from "../../__fixtures__/places";
 
@@ -24,8 +24,6 @@ export function handlePlaceClick(place, $placeResult) {
     lastInfoWindowOpen.close();
   }
 
-  $placeResult.classList.add("place--highlighted");
-
   const marker = currentPlacesMarkers[place.id];
 
   const infoWindow = new google.maps.InfoWindow({
@@ -35,7 +33,24 @@ export function handlePlaceClick(place, $placeResult) {
   infoWindow.open(map, marker);
   lastInfoWindowOpen = infoWindow;
 
+  setHighlightedPlace($placeResult);
   setMapCenter(marker.position, { pan: true });
+}
+
+function handlePlaceMarkerClick(place, $placeResult) {
+  const placesResultsMid = $placesResults.clientWidth / 2;
+  const placeResultMid = $placeResult.clientWidth / 2;
+  const MARGIN_OFFSET = 10;
+  const leftOffset =
+    $placeResult.offsetLeft - MARGIN_OFFSET - placesResultsMid + placeResultMid;
+
+  $placesResults.scrollTo({
+    top: 0,
+    left: leftOffset,
+    behavior: "smooth"
+  });
+
+  handlePlaceClick(place, $placeResult);
 }
 
 function renderPlaces(places) {

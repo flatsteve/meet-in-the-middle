@@ -26,9 +26,14 @@ $place-size: 16rem;
 }
 
 .place {
+  border-top: 0.25rem solid transparent;
   margin-right: 0.75rem;
   min-width: $place-size;
   padding-bottom: 1.25rem;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 
   @include wider($tablet) {
     margin-right: 1.25rem;
@@ -39,7 +44,7 @@ $place-size: 16rem;
   }
 
   &--highlighted {
-    background-color: pink;
+    border-color: $purple;
   }
 
   &__title,
@@ -88,7 +93,6 @@ $place-size: 16rem;
     background-color: lighten($grey, 30%);
     background-size: cover;
     background-position: top;
-    border-radius: 0.25rem;
     display: flex;
     justify-content: center;
     height: $place-size - $place-size / 3;

@@ -88,18 +88,6 @@ function resetUI() {
   setMeetButtonDisabled(true);
 }
 
-export function handlePlaceMarkerClick(place, $placeResult) {
-  const placeResultsMid = $placesResults.clientWidth / 2;
-
-  $placesResults.scrollTo({
-    top: 0,
-    left: $placeResult.offsetLeft - placeResultsMid,
-    behavior: "smooth"
-  });
-
-  handlePlaceClick(place, $placeResult);
-}
-
 export function buildPlaceTemplate(place) {
   return `
     <div class="place" data-id="${place.id}">
@@ -148,6 +136,16 @@ export function setMeetButtonDisabled(shouldBeDisabled) {
   } else {
     $meetButton.disabled = false;
   }
+}
+
+export function setHighlightedPlace($placeResult) {
+  const $highlightedPlace = $placesResults.querySelector(".place--highlighted");
+
+  if ($highlightedPlace) {
+    $highlightedPlace.classList.remove("place--highlighted");
+  }
+
+  $placeResult.classList.add("place--highlighted");
 }
 
 export function toggleShowPlaces() {
