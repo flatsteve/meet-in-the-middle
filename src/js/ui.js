@@ -53,7 +53,11 @@ function getPlaceMapURL(place) {
   }&query_place_id=${place.place_id}`;
 }
 
-function getPlaceStarts(rating) {
+function getPlaceStars(rating) {
+  if (!rating) {
+    return "No rating";
+  }
+
   const RATING_TOTAL = 5;
   const stars = [];
   const remainder = Math.round((rating % 1) * 2) / 2;
@@ -92,11 +96,11 @@ export function buildPlaceTemplate(place) {
       <h3 class="place__title">${place.name}</h3>
       <p class="place__details"> 
         <span class="place__rating">
-          <strong>${place.rating}</strong> 
+          <strong>${place.rating || ""}</strong> 
           <span class="place__rating__stars">
-            ${getPlaceStarts(place.rating)}
+            ${getPlaceStars(place.rating)}
           </span> 
-          (${place.user_ratings_total}) 
+          (${place.user_ratings_total || 0}) 
         </span>
         
         <span class="place__price">
