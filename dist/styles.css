@@ -440,6 +440,9 @@ input:focus {
         margin-bottom: 0;
         width: auto; } }
 
+.gm-style-iw-c {
+  font-weight: bold !important; }
+
 .places {
   height: 0;
   opacity: 0;
@@ -462,6 +465,8 @@ input:focus {
       margin-right: 1.25rem; } }
   .place:hover {
     cursor: pointer; }
+  .place--highlighted {
+    background-color: pink; }
   .place__title, .place__address {
     overflow: hidden;
     text-overflow: ellipsis;
