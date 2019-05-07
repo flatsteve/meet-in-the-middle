@@ -2,9 +2,9 @@ import { handleMeetButtonClicked } from "./locations";
 import { resetPlaces, handlePlaceClick } from "./places";
 import { clearMarkers } from "./map";
 
-import fullStar from "../images/full-star.svg";
-import halfStar from "../images/half-star.svg";
-import emptyStar from "../images/empty-star.svg";
+import fullStar from "../images/icons/full-star.svg";
+import halfStar from "../images/icons/half-star.svg";
+import emptyStar from "../images/icons/empty-star.svg";
 
 export const $placesResults = document.querySelector(".places__results");
 const $placesContainer = document.querySelector(".places");

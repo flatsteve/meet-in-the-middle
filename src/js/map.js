@@ -1,6 +1,8 @@
 import { showNearbyPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
 
+import customMarkerURL from "../images/marker.png";
+
 let map;
 let mapMarkers = [];
 
@@ -21,19 +23,29 @@ export function insertMarker(
     recenter = true,
     animation = "DROP",
     title = "Location",
+    customMarker = false,
     markerColour = "red"
   } = {}
 ) {
-  const markerURL = `https://maps.google.com/mapfiles/ms/icons/${markerColour}-dot.png`;
+  let mapIcon;
+
+  if (customMarker) {
+    mapIcon = {
+      url: customMarkerURL,
+      scaledSize: new google.maps.Size(25, 25)
+    };
+  } else {
+    mapIcon = {
+      url: `https://maps.google.com/mapfiles/ms/icons/${markerColour}-dot.png`
+    };
+  }
 
   const marker = new google.maps.Marker({
     position: locationLatLng,
     map: map,
     animation: google.maps.Animation[animation],
     title,
-    icon: {
-      url: markerURL
-    }
+    icon: mapIcon
   });
 
   if (recenter) {

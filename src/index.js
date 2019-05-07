@@ -17,4 +17,4 @@ Sentry.init({
 export const map = initMap();
 initPlacesService();
 initLocationsAutocomplete();
-// testPlaces();
+testPlaces();

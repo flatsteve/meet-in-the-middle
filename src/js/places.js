@@ -44,7 +44,10 @@ function renderPlaces(places) {
     })
     .forEach(placeResult => {
       const placeLocation = placeResult.geometry.location;
-      const marker = insertMarker(placeLocation, { title: placeResult.name });
+      const marker = insertMarker(placeLocation, {
+        title: placeResult.name,
+        customMarker: true
+      });
 
       $placesResults.insertAdjacentHTML(
         "beforeend",

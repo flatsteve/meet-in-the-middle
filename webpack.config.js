@@ -34,6 +34,17 @@ module.exports = (env, args) => {
           ]
         },
         {
+          test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                outputPath: "images"
+              }
+            }
+          ]
+        },
+        {
           test: /\.svg$/,
           loader: "svg-inline-loader"
         }
