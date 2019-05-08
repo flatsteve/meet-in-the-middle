@@ -11,9 +11,11 @@ $place-size: 16rem;
   height: 0; // Not shown by default
   opacity: 0;
   transition: all 0.3s ease-in;
+  pointer-events: none;
   z-index: -1;
 
   &--show {
+    pointer-events: all;
     height: auto;
     opacity: 1;
     z-index: 1;
@@ -26,7 +28,7 @@ $place-size: 16rem;
 }
 
 .place {
-  border-top: 0.25rem solid transparent;
+  border-top: 0.5rem solid transparent;
   margin-right: 0.75rem;
   min-width: $place-size;
   padding-bottom: 1.25rem;
@@ -44,7 +46,7 @@ $place-size: 16rem;
   }
 
   &--highlighted {
-    border-color: $purple;
+    border-color: $blue;
   }
 
   &__title,
@@ -111,5 +113,5 @@ $place-size: 16rem;
 
 .search-again {
   display: flex;
-  margin: 0 auto;
+  margin: 0.75rem auto 0;
 }

@@ -10,7 +10,8 @@ export const MAP_CONFIG = {
   zoom: 12,
   styles: [
     {
-      elementType: "geometry",
+      featureType: "landscape.man_made",
+      elementType: "geometry.fill",
       stylers: [
         {
           color: "#f5f5f5"
@@ -18,7 +19,8 @@ export const MAP_CONFIG = {
       ]
     },
     {
-      elementType: "labels.icon",
+      featureType: "poi.attraction",
+      elementType: "labels",
       stylers: [
         {
           visibility: "off"
@@ -26,144 +28,74 @@ export const MAP_CONFIG = {
       ]
     },
     {
-      elementType: "labels.text.fill",
+      featureType: "poi.business",
+      elementType: "labels",
       stylers: [
         {
-          color: "#616161"
+          visibility: "off"
         }
       ]
     },
     {
-      elementType: "labels.text.stroke",
+      featureType: "poi.government",
+      elementType: "labels",
       stylers: [
         {
-          color: "#f5f5f5"
+          visibility: "off"
         }
       ]
     },
     {
-      featureType: "administrative.land_parcel",
-      elementType: "labels.text.fill",
+      featureType: "poi.medical",
+      elementType: "labels",
       stylers: [
         {
-          color: "#bdbdbd"
-        }
-      ]
-    },
-    {
-      featureType: "poi",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#eeeeee"
-        }
-      ]
-    },
-    {
-      featureType: "poi",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#757575"
+          visibility: "off"
         }
       ]
     },
     {
       featureType: "poi.park",
-      elementType: "geometry",
+      elementType: "labels",
       stylers: [
         {
-          color: "#e5e5e5"
+          visibility: "off"
         }
       ]
     },
     {
-      featureType: "poi.park",
-      elementType: "labels.text.fill",
+      featureType: "poi.place_of_worship",
+      elementType: "labels",
       stylers: [
         {
-          color: "#9e9e9e"
+          visibility: "off"
         }
       ]
     },
     {
-      featureType: "road",
-      elementType: "geometry",
+      featureType: "poi.school",
+      elementType: "labels",
       stylers: [
         {
-          color: "#ffffff"
+          visibility: "off"
         }
       ]
     },
     {
-      featureType: "road.arterial",
-      elementType: "labels.text.fill",
+      featureType: "poi.sports_complex",
+      elementType: "labels",
       stylers: [
         {
-          color: "#757575"
-        }
-      ]
-    },
-    {
-      featureType: "road.highway",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#dadada"
-        }
-      ]
-    },
-    {
-      featureType: "road.highway",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#616161"
-        }
-      ]
-    },
-    {
-      featureType: "road.local",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#9e9e9e"
-        }
-      ]
-    },
-    {
-      featureType: "transit.line",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#e5e5e5"
-        }
-      ]
-    },
-    {
-      featureType: "transit.station",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#eeeeee"
+          visibility: "off"
         }
       ]
     },
     {
       featureType: "water",
-      elementType: "geometry",
+      elementType: "geometry.fill",
       stylers: [
         {
-          color: "#c9c9c9"
-        }
-      ]
-    },
-    {
-      featureType: "water",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#9e9e9e"
+          color: "#b9d6f2"
         }
       ]
     }

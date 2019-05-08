@@ -1,38 +1,41 @@
+@import "./colours";
+
 .button {
-  background-color: $purple;
+  background-color: $orange;
   border: none;
   box-shadow: 0 0.1rem 0.25rem 0 rgba($grey, 0.5);
-  color: #ffffff;
+  color: $white;
   border-radius: 0.5rem;
   font-size: 1rem;
   padding: 1.25rem;
   transition: all 0.3s ease-in;
 
-  &:hover {
+  &:disabled {
+    box-shadow: none;
+    color: $white;
+    cursor: not-allowed;
+  }
+
+  &:hover:enabled {
     box-shadow: none;
     cursor: pointer;
-    background-color: darken($purple, 15%);
+    background-color: darken($orange, 15%);
   }
 
   &:focus {
     outline: none;
   }
 
-  &:disabled {
-    background-color: lighten($grey, 25%);
-    box-shadow: none;
-    color: $grey;
-    cursor: not-allowed;
-  }
-
   &--link {
     background-color: $white;
     box-shadow: none;
-    color: $purple;
+    color: $blue;
+    padding: 0.25rem;
 
-    &:hover {
+    &:hover:enabled {
       background-color: $white;
-      color: darken($purple, 15%);
+      color: darken($blue, 15%);
+      cursor: pointer;
     }
   }
 }
