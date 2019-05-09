@@ -10,9 +10,11 @@ if (module.hot) {
   module.hot.accept();
 }
 
-Sentry.init({
-  dsn: "https://7ae9bb187a1d448d9e35c83704c37433@sentry.io/1454083"
-});
+if (process.env.NODE_ENV === "production") {
+  Sentry.init({
+    dsn: "https://7ae9bb187a1d448d9e35c83704c37433@sentry.io/1454083"
+  });
+}
 
 export const map = initMap();
 initPlacesService();

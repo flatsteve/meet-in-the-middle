@@ -1,41 +1,26 @@
 import { insertMarker, showMiddlePoint, setMapCenter } from "./map";
+import { getGeoLocation } from "./geo";
 import { hideLocationsError, setMeetButtonDisabled } from "./ui";
 import { LOCATION_INPUTS_INITIAL_VALUES, TABLET_WIDTH } from "./constants";
 
 let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
 
-const getGeoLocation = new Promise(resolve => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const geoPosition = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-
-        const circle = new google.maps.Circle({
-          center: geoPosition,
-          radius: position.coords.accuracy
-        });
-
-        const geoBounds = circle.getBounds();
-
-        setMapCenter(geoPosition);
-        resolve(geoBounds);
-      },
-      () => {
-        // User may have blocked location
-        resolve(null);
-      },
-      { timeout: 10000 }
-    );
-  } else {
-    resolve(null);
-  }
-});
-
 export async function initLocationsAutocomplete() {
-  const bounds = await getGeoLocation;
+  const position = await getGeoLocation;
+
+  const geoPosition = {
+    lat: position.coords.latitude,
+    lng: position.coords.longitude
+  };
+
+  const circle = new google.maps.Circle({
+    center: geoPosition,
+    radius: position.coords.accuracy
+  });
+
+  const bounds = circle.getBounds();
+
+  setMapCenter(geoPosition);
 
   locationInputs.yourLocation.ref = createAutocompleteInput({
     inputId: "yourLocation",
@@ -68,14 +53,23 @@ export function handleMeetButtonClicked() {
   Handle when address was selected from Google Places select and
   get the lat lng to insert a marker - also clears any previous marker
 */
-function handleAddressSelected(inputId) {
+export function handleAddressSelected(
+  inputId,
+  { preSetCoordinates = false } = {}
+) {
   let title;
   let markerColour;
+  let coordinates;
 
-  const place = locationInputs[inputId].ref.getPlace().geometry.location;
-  const lat = place.lat();
-  const lng = place.lng();
-  const coordinates = { lat, lng };
+  // 'Your location' coordinates can also be set by getting the users geolocation
+  if (!preSetCoordinates) {
+    const place = locationInputs[inputId].ref.getPlace().geometry.location;
+    const lat = place.lat();
+    const lng = place.lng();
+    coordinates = { lat, lng };
+  } else {
+    coordinates = preSetCoordinates;
+  }
 
   if (inputId === "yourLocation") {
     title = "Your Location";

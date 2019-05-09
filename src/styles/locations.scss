@@ -57,3 +57,23 @@
     }
   }
 }
+
+.your-location-wrapper {
+  align-items: center;
+  display: flex;
+}
+
+.geolocation-icon-button {
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  svg {
+    fill: $orange;
+    width: 1.15rem;
+  }
+}

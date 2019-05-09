@@ -1,6 +1,7 @@
-import { handleMeetButtonClicked } from "./locations";
-import { resetPlaces, handlePlaceClick } from "./places";
+import { handleMeetButtonClicked, handleAddressSelected } from "./locations";
+import { resetPlaces } from "./places";
 import { clearMarkers } from "./map";
+import { getGeoLocation } from "./geo";
 
 import fullStar from "../images/icons/full-star.svg";
 import halfStar from "../images/icons/half-star.svg";
@@ -9,7 +10,11 @@ import emptyStar from "../images/icons/empty-star.svg";
 export const $placesResults = document.querySelector(".places__results");
 const $placesContainer = document.querySelector(".places");
 const $locationsContainer = document.querySelector(".locations");
+const $geolocationIconButton = document.querySelector(
+  ".geolocation-icon-button"
+);
 const $locationsForm = document.getElementById("locations-form");
+const $yourLocationInput = document.getElementById("yourLocation");
 const $meetButton = document.getElementById("meet");
 const $searchAgainButton = document.querySelector(".search-again");
 
@@ -176,5 +181,19 @@ export function toggleShowPlaces() {
   }
 }
 
+async function handleGeolocationIconClicked() {
+  const position = await getGeoLocation;
+
+  const coordinates = {
+    lat: position.coords.latitude,
+    lng: position.coords.longitude
+  };
+
+  handleAddressSelected("yourLocation", { preSetCoordinates: coordinates });
+
+  $yourLocationInput.value = "Current location";
+}
+
 $meetButton.addEventListener("click", handleMeetButtonClicked);
 $searchAgainButton.addEventListener("click", toggleShowPlaces);
+$geolocationIconButton.addEventListener("click", handleGeolocationIconClicked);
