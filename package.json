@@ -23,12 +23,12 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "svg-inline-loader": "^0.8.0",
-    "webpack": "^4.30.0",
+    "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
-    "@sentry/browser": "^5.1.2",
+    "@sentry/browser": "^5.2.0",
     "normalize.css": "^8.0.1"
   }
 }
