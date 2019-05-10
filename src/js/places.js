@@ -78,7 +78,9 @@ function renderPlaces(places) {
 /*
   Shows places within a 500 meter radius of the target location (the 'middle')
 */
-export function showNearbyPlaces(location, { type = "restaurant" } = {}) {
+export function showNearbyPlaces(location) {
+  const type = document.querySelector('input[name="place-type"]:checked').value;
+
   const request = {
     location,
     radius: "500",

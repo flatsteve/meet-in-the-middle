@@ -32,43 +32,82 @@
       <div class="location-loading"></div>
 
       <form id="locations-form" class="locations">
-        <div class="form-group">
-          <label for="yourLocation">Your location</label>
+        <div class="locations__controls">
+          <div class="locations__inputs">
+            <div class="form-group">
+              <label for="yourLocation">Your location</label>
 
-          <div class="your-location-wrapper">
-            <input
-              type="text"
-              id="yourLocation"
-              placeholder="e.g. 17 Cherry Tree Lane"
-            />
+              <div class="your-location-wrapper">
+                <input
+                  type="text"
+                  id="yourLocation"
+                  placeholder="e.g. 17 Cherry Tree Lane"
+                />
 
-            <button class="geolocation-icon-button" type="button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 64">
-                <g>
-                  <path
-                    d="M21 .2C9.7.2.5 9.4.5 20.7c0 6.4 3.8 12.5 8.6 20.3 3.5 5.6 7.4 11.9 10.5 19.6l1.4 3.3 1.4-3.3c3.3-7.7 7.2-14 10.6-19.5 4.8-7.8 8.5-13.9 8.5-20.4C41.5 9.4 32.3.2 21 .2zm9.4 39.3c-3 4.9-6.3 10.3-9.4 16.8-3-6.5-6.4-12-9.4-16.9C7.1 32 3.5 26.2 3.5 20.7c0-9.6 7.8-17.5 17.5-17.5S38.5 11 38.5 20.7c0 5.6-3.6 11.4-8.1 18.8z"
-                  />
-                  <path
-                    d="M33.3 19h-1.6c-.7-4.7-4.4-8.5-9.1-9.2V8.2c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v1.6c-4.7.7-8.5 4.4-9.1 9.2H8.9c-.8 0-1.5.7-1.5 1.5S8.1 22 8.9 22h1.6c.7 4.7 4.4 8.5 9.1 9.2v1.6c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-1.6c4.7-.7 8.5-4.4 9.1-9.2h1.6c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5zm-10.8 9.1v-2.3c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v2.3c-3.1-.6-5.5-3-6.1-6.1h2.3c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5h-2.3c.6-3.1 3-5.5 6.1-6.1v2.3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-2.3c3.1.6 5.5 3 6.1 6.1h-2.3c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5h2.3c-.6 3.1-3 5.5-6.1 6.1z"
-                  />
-                </g>
-              </svg>
-            </button>
+                <button class="geolocation-icon-button" type="button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 64">
+                    <g>
+                      <path
+                        d="M21 .2C9.7.2.5 9.4.5 20.7c0 6.4 3.8 12.5 8.6 20.3 3.5 5.6 7.4 11.9 10.5 19.6l1.4 3.3 1.4-3.3c3.3-7.7 7.2-14 10.6-19.5 4.8-7.8 8.5-13.9 8.5-20.4C41.5 9.4 32.3.2 21 .2zm9.4 39.3c-3 4.9-6.3 10.3-9.4 16.8-3-6.5-6.4-12-9.4-16.9C7.1 32 3.5 26.2 3.5 20.7c0-9.6 7.8-17.5 17.5-17.5S38.5 11 38.5 20.7c0 5.6-3.6 11.4-8.1 18.8z"
+                      />
+                      <path
+                        d="M33.3 19h-1.6c-.7-4.7-4.4-8.5-9.1-9.2V8.2c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v1.6c-4.7.7-8.5 4.4-9.1 9.2H8.9c-.8 0-1.5.7-1.5 1.5S8.1 22 8.9 22h1.6c.7 4.7 4.4 8.5 9.1 9.2v1.6c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-1.6c4.7-.7 8.5-4.4 9.1-9.2h1.6c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5zm-10.8 9.1v-2.3c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v2.3c-3.1-.6-5.5-3-6.1-6.1h2.3c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5h-2.3c.6-3.1 3-5.5 6.1-6.1v2.3c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-2.3c3.1.6 5.5 3 6.1 6.1h-2.3c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5h2.3c-.6 3.1-3 5.5-6.1 6.1z"
+                      />
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="theirLocation">Their location</label>
+
+              <input
+                type="text"
+                id="theirLocation"
+                placeholder="e.g. 221B Baker St"
+              />
+            </div>
+          </div>
+
+          <div class="locations__radios">
+            <p>We're looking for...</p>
+
+            <div class="locations__radios__item">
+              <input
+                type="radio"
+                name="place-type"
+                id="restaurant"
+                value="restaurant"
+                checked
+              />
+              <label for="restaurant">Restaurants</label>
+            </div>
+
+            <div class="locations__radios__item">
+              <input type="radio" name="place-type" id="bar" value="bar" />
+              <label for="bar">Bars</label>
+            </div>
+
+            <div class="locations__radios__item">
+              <input type="radio" name="place-type" id="cafe" value="cafe" />
+              <label for="cafe">Cafes</label>
+            </div>
+
+            <div class="locations__radios__item">
+              <input
+                type="radio"
+                name="place-type"
+                id="club"
+                value="night_club"
+              />
+              <label for="club">Clubs</label>
+            </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="theirLocation">Their location</label>
-
-          <input
-            type="text"
-            id="theirLocation"
-            placeholder="e.g. 221B Baker St"
-          />
-        </div>
-
         <button id="meet" class="button" type="button" disabled="disabled">
-          Meet in the Middle!
+          Meet in the Middle
         </button>
       </form>
 
@@ -93,6 +132,22 @@
           a train to get to? Never fear, let Meet in the Middle suggest the best
           spots that everyone can get too without losing the will to live 😝
         </p>
+
+        <h3>
+          How to use Meet in the Middle
+        </h3>
+
+        <ol>
+          <li>
+            Enter your location, and the location of the person you would like
+            to meet up with
+          </li>
+          <li>Choose the type of place you want to visit</li>
+          <li>
+            Hit "Meet in the Middle" and get suggestions based on a mid point
+            between your locations
+          </li>
+        </ol>
       </div>
     </div>
 

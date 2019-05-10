@@ -26,7 +26,7 @@
   }
 
   .button {
-    margin-top: 1.25rem;
+    margin-top: 1.75rem;
   }
 
   .form-group {
@@ -39,13 +39,8 @@
     margin-top: 0.25rem;
   }
 
-  @include wider($mobile-landscape) {
-    max-width: 24rem;
-    margin: 0 auto;
-  }
-
   @include wider($tablet) {
-    align-items: flex-end;
+    align-items: flex-start;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
@@ -59,6 +54,62 @@
     input {
       margin-bottom: 0;
       width: auto;
+    }
+  }
+}
+
+.locations__controls {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  @include wider($tablet) {
+    margin-right: 2.5rem;
+    max-width: 36rem;
+  }
+}
+
+.locations__inputs {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include wider($mobile-landscape) {
+    flex-direction: row;
+
+    .form-group:last-of-type {
+      margin-left: 1.25rem;
+    }
+  }
+}
+
+.locations__radios {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+
+  p {
+    margin: 0 0 0.25rem;
+    width: 100%;
+  }
+
+  @include wider($mobile-landscape) {
+    margin-top: 1.25rem;
+
+    p {
+      width: auto;
+    }
+  }
+
+  &__item {
+    align-items: center;
+    display: flex;
+
+    label {
+      margin: 0 0 0 0.25rem;
     }
   }
 }

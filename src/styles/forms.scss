@@ -11,7 +11,7 @@ label {
   margin-bottom: 0.25rem;
 }
 
-input {
+input[type="text"] {
   background-color: lighten($grey, 40%);
   border: none;
   border-radius: 0.5rem;
