@@ -391,10 +391,8 @@ input {
   padding: 0.75rem;
   transition: border 0.3s ease-in;
   width: 100%; }
-
-input:focus {
-  border-color: #1b378b;
-  outline: none; }
+  input:focus {
+    outline: none; }
 
 #map {
   height: 50vh; }
@@ -418,6 +416,9 @@ input:focus {
     opacity: 0;
     overflow-y: hidden;
     z-index: -1; }
+  .locations[disabled] {
+    opacity: 0.5;
+    pointer-events: none; }
   .locations .button {
     margin-top: 1.25rem; }
   .locations .form-group {
@@ -454,9 +455,21 @@ input:focus {
   padding: 0.25rem 0.5rem; }
   .geolocation-icon-button:hover {
     cursor: pointer; }
+  .geolocation-icon-button:focus {
+    outline: none; }
   .geolocation-icon-button svg {
     fill: #ff6b35;
     width: 1.15rem; }
+
+.location-loading {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: #2750cb; }
+  .location-loading .spinner {
+    height: 1.75rem;
+    margin-right: 0.75rem;
+    width: 1.75rem; }
 
 .gm-style-iw-c {
   font-weight: bold !important; }
