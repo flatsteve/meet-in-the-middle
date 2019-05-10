@@ -20,9 +20,8 @@ input {
   padding: 0.75rem;
   transition: border 0.3s ease-in;
   width: 100%;
-}
 
-input:focus {
-  border-color: darken($blue, 15%);
-  outline: none;
+  &:focus {
+    outline: none;
+  }
 }

@@ -20,6 +20,11 @@
     z-index: -1;
   }
 
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   .button {
     margin-top: 1.25rem;
   }
@@ -79,5 +84,18 @@
   svg {
     fill: $orange;
     width: 1.15rem;
+  }
+}
+
+.location-loading {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: $blue;
+
+  .spinner {
+    height: 1.75rem;
+    margin-right: 0.75rem;
+    width: 1.75rem;
   }
 }

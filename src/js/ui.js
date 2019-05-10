@@ -3,6 +3,7 @@ import { resetPlaces } from "./places";
 import { clearMarkers } from "./map";
 import { getGeoLocation } from "./geo";
 
+import spinner from "../images/icons/spinner.svg";
 import fullStar from "../images/icons/full-star.svg";
 import halfStar from "../images/icons/half-star.svg";
 import emptyStar from "../images/icons/empty-star.svg";
@@ -14,6 +15,7 @@ const $geolocationIconButton = document.querySelector(
   ".geolocation-icon-button"
 );
 const $locationsForm = document.getElementById("locations-form");
+const $locationLoading = document.querySelector(".location-loading");
 const $yourLocationInput = document.getElementById("yourLocation");
 const $meetButton = document.getElementById("meet");
 const $searchAgainButton = document.querySelector(".search-again");
@@ -178,6 +180,18 @@ export function toggleShowPlaces() {
     $locationsContainer.classList.add("locations--hide");
     $placesContainer.classList.add("places--show");
     uiState.placesShown = true;
+  }
+}
+
+export function toggleLocationLoading(shouldShow) {
+  const loadingTemplate = `${spinner} <p>Getting your current location...</p>`;
+
+  if (shouldShow) {
+    $locationsForm.setAttribute("disabled", "");
+    $locationLoading.insertAdjacentHTML("beforeend", loadingTemplate);
+  } else {
+    $locationsForm.removeAttribute("disabled", "");
+    $locationLoading.innerHTML = "";
   }
 }
 

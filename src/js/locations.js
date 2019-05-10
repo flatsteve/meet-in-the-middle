@@ -1,26 +1,41 @@
 import { insertMarker, showMiddlePoint, setMapCenter } from "./map";
 import { getGeoLocation } from "./geo";
-import { hideLocationsError, setMeetButtonDisabled } from "./ui";
+import {
+  hideLocationsError,
+  toggleLocationLoading,
+  setMeetButtonDisabled
+} from "./ui";
 import { LOCATION_INPUTS_INITIAL_VALUES, TABLET_WIDTH } from "./constants";
 
 let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
 
 export async function initLocationsAutocomplete() {
-  const position = await getGeoLocation;
+  let position;
+  let bounds = null;
 
-  const geoPosition = {
-    lat: position.coords.latitude,
-    lng: position.coords.longitude
-  };
+  try {
+    toggleLocationLoading(true);
 
-  const circle = new google.maps.Circle({
-    center: geoPosition,
-    radius: position.coords.accuracy
-  });
+    position = await getGeoLocation;
 
-  const bounds = circle.getBounds();
+    toggleLocationLoading(false);
 
-  setMapCenter(geoPosition);
+    const geoPosition = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+
+    setMapCenter(geoPosition);
+
+    const circle = new google.maps.Circle({
+      center: geoPosition,
+      radius: position.coords.accuracy
+    });
+
+    bounds = circle.getBounds();
+  } catch (error) {
+    toggleLocationLoading(false);
+  }
 
   locationInputs.yourLocation.ref = createAutocompleteInput({
     inputId: "yourLocation",
@@ -29,7 +44,7 @@ export async function initLocationsAutocomplete() {
 
   locationInputs.theirLocation.ref = createAutocompleteInput({
     inputId: "theirLocation",
-    bounds // TODO - should we constrain "their" bounds?
+    bounds
   });
 }
 
