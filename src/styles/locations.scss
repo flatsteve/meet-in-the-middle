@@ -72,6 +72,10 @@
     cursor: pointer;
   }
 
+  &:focus {
+    outline: none;
+  }
+
   svg {
     fill: $orange;
     width: 1.15rem;

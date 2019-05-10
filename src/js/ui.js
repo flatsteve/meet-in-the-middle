@@ -182,7 +182,17 @@ export function toggleShowPlaces() {
 }
 
 async function handleGeolocationIconClicked() {
-  const position = await getGeoLocation;
+  let position;
+
+  try {
+    position = await getGeoLocation;
+  } catch (error) {
+    alert(error);
+  }
+
+  if (!position) {
+    return;
+  }
 
   const coordinates = {
     lat: position.coords.latitude,

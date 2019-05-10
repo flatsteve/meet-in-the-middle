@@ -1,4 +1,4 @@
-export const getGeoLocation = new Promise(resolve => {
+export const getGeoLocation = new Promise((resolve, reject) => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -6,11 +6,11 @@ export const getGeoLocation = new Promise(resolve => {
       },
       () => {
         // User may have blocked location
-        resolve(null);
+        reject("Please enabled location to use this feature.");
       },
       { timeout: 10000 }
     );
   } else {
-    resolve(null);
+    reject("Geolocation not available.");
   }
 });

@@ -1,8 +1,6 @@
 import { showNearbyPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
 
-import customMarkerURL from "../images/marker.png";
-
 let map;
 let mapMarkers = [];
 
@@ -11,6 +9,7 @@ let mapMarkers = [];
 */
 export function initMap() {
   map = new google.maps.Map(document.getElementById("map"), MAP_CONFIG);
+
   return map;
 }
 
@@ -23,13 +22,13 @@ export function insertMarker(
     recenter = true,
     animation = "DROP",
     title = "Location",
-    customMarker = false,
+    customMarkerURL = false,
     markerColour = "red"
   } = {}
 ) {
   let mapIcon;
 
-  if (customMarker) {
+  if (customMarkerURL) {
     mapIcon = {
       url: customMarkerURL,
       scaledSize: new google.maps.Size(25, 25)

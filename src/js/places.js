@@ -10,6 +10,8 @@ import {
 } from "./ui";
 import { placeResults } from "../../__fixtures__/places";
 
+import customMarkerURL from "../images/marker.png";
+
 let placesService;
 let currentPlacesMarkers = {};
 let lastInfoWindowOpen;
@@ -44,9 +46,10 @@ function renderPlaces(places) {
     })
     .forEach(placeResult => {
       const placeLocation = placeResult.geometry.location;
+
       const marker = insertMarker(placeLocation, {
         title: placeResult.name,
-        customMarker: true
+        customMarkerURL
       });
 
       $placesResults.insertAdjacentHTML(
@@ -72,6 +75,9 @@ function renderPlaces(places) {
   toggleShowPlaces();
 }
 
+/*
+  Shows places within a 500 meter radius of the target location (the 'middle')
+*/
 export function showNearbyPlaces(location, { type = "restaurant" } = {}) {
   const request = {
     location,
@@ -92,6 +98,9 @@ export function showNearbyPlaces(location, { type = "restaurant" } = {}) {
   });
 }
 
+/*
+  Remove places from the DOM and clear references in memory
+*/
 export function resetPlaces() {
   lastInfoWindowOpen = null;
   currentPlacesMarkers = {};
