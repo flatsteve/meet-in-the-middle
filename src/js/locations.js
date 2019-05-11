@@ -68,10 +68,10 @@ export function handleMeetButtonClicked() {
   Handle when address was selected from Google Places select and
   get the lat lng to insert a marker - also clears any previous marker
 */
-export function handleAddressSelected(
+export function handleAddressSelected({
   inputId,
-  { preSetCoordinates = false } = {}
-) {
+  preSetCoordinates = false
+} = {}) {
   let title;
   let markerColour;
   let coordinates;
@@ -110,6 +110,9 @@ export function handleAddressSelected(
   }
 }
 
+/*
+  Scroll the page down to to the input element to avoid keyboard overlap
+*/
 function handleInputFocus(inputElement) {
   if (window.innerWidth < TABLET_WIDTH) {
     window.scrollTo({
@@ -136,12 +139,15 @@ function createAutocompleteInput({ inputId, bounds }) {
 
   inputAutocomplete.setFields(["geometry"]);
   inputAutocomplete.addListener("place_changed", () =>
-    handleAddressSelected(inputId)
+    handleAddressSelected({ inputId })
   );
 
   return inputAutocomplete;
 }
 
+/*
+  Validation function - returns false is any input has no coordinates
+*/
 function isLocationsComplete() {
   for (let inputKey in locationInputs) {
     if (!locationInputs[inputKey].coordinates) {

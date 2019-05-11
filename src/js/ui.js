@@ -2,6 +2,7 @@ import { handleMeetButtonClicked, handleAddressSelected } from "./locations";
 import { resetPlaces } from "./places";
 import { clearMarkers } from "./map";
 import { getGeoLocation } from "./geo";
+import { PLACE_IMG_WIDTH } from "./constants";
 
 import spinner from "../images/icons/spinner.svg";
 import fullStar from "../images/icons/full-star.svg";
@@ -24,14 +25,21 @@ let uiState = {
   placesShown: false
 };
 
-function getPlacePhoto(place) {
-  if (!place) {
+function resetUI() {
+  clearMarkers();
+  resetPlaces();
+  $locationsForm.reset();
+  setMeetButtonDisabled(true);
+}
+
+function getPlacePhoto(placeData) {
+  if (!placeData) {
     return;
   }
 
-  if (place.photos && place.photos[0].getUrl) {
-    const placeImageURL = place.photos[0].getUrl({
-      maxWidth: 512
+  if (placeData.photos && placeData.photos[0].getUrl) {
+    const placeImageURL = placeData.photos[0].getUrl({
+      maxWidth: PLACE_IMG_WIDTH
     });
 
     return `<div class="place__image" style="background-image: url(${placeImageURL})"></div>`;
@@ -40,27 +48,33 @@ function getPlacePhoto(place) {
   return '<div class="place__image"><p>No image found</p></div>';
 }
 
-function getPriceLevel(place) {
-  if (!place.price_level) {
+/*
+  Returns a sting containing "£" characters representing the price level
+*/
+function getPriceLevel(placeData) {
+  if (!placeData.price_level) {
     return "";
   }
 
   const prices = [];
 
-  for (let i = 0; i < place.price_level; i++) {
+  for (let i = 0; i < placeData.price_level; i++) {
     prices.push("£");
   }
 
   return prices.join("");
 }
 
-function getPlaceMapURL(place) {
+function getPlaceMapURL(placeData) {
   return `https://www.google.com/maps/search/?api=1&query=${
-    place.name
-  }&query_place_id=${place.place_id}`;
+    placeData.name
+  }&query_place_id=${placeData.place_id}`;
 }
 
-function getPlaceStars(rating) {
+/*
+  Returns a sting containing SVG stars filled to the closest 0.5
+*/
+function getPlaceStarRating(rating) {
   if (!rating) {
     return "No rating";
   }
@@ -88,34 +102,27 @@ function getPlaceStars(rating) {
   return stars.join("");
 }
 
-function resetUI() {
-  clearMarkers();
-  resetPlaces();
-  $locationsForm.reset();
-  setMeetButtonDisabled(true);
-}
-
-export function buildPlaceTemplate(place) {
+export function buildPlaceTemplate(placeData) {
   return `
-    <div class="place" data-id="${place.id}">
-      ${getPlacePhoto(place)}
+    <div class="place" data-id="${placeData.id}">
+      ${getPlacePhoto(placeData)}
 
-      <h3 class="place__title">${place.name}</h3>
+      <h3 class="place__title">${placeData.name}</h3>
       <p class="place__details"> 
         <span class="place__rating">
-          <strong>${place.rating || ""}</strong> 
+          <strong>${placeData.rating || ""}</strong> 
           <span class="place__rating__stars">
-            ${getPlaceStars(place.rating)}
+            ${getPlaceStarRating(placeData.rating)}
           </span> 
-          (${place.user_ratings_total || 0}) 
+          (${placeData.user_ratings_total || 0}) 
         </span>
         
         <span class="place__price">
-          <strong>${getPriceLevel(place)}</strong>
+          <strong>${getPriceLevel(placeData)}</strong>
         </span>
       </p>
-      <p class="place__address">${place.vicinity}</p>
-      <a href="${getPlaceMapURL(place)}" target="_blank">
+      <p class="place__address">${placeData.vicinity}</p>
+      <a href="${getPlaceMapURL(placeData)}" target="_blank">
         Open in Google Maps
       </a>
     </div>
@@ -213,7 +220,10 @@ async function handleGeolocationIconClicked() {
     lng: position.coords.longitude
   };
 
-  handleAddressSelected("yourLocation", { preSetCoordinates: coordinates });
+  handleAddressSelected({
+    inputId: "yourLocation",
+    preSetCoordinates: coordinates
+  });
 
   $yourLocationInput.value = "Current location";
 }

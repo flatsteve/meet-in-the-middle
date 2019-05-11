@@ -1,5 +1,6 @@
 export const CENTRAL_LND_COORDS = { lat: 51.515419, lng: -0.141099 };
 export const TABLET_WIDTH = 768;
+export const PLACE_IMG_WIDTH = 512;
 
 export const MAP_CONFIG = {
   center: CENTRAL_LND_COORDS,

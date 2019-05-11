@@ -20,22 +20,22 @@ export function initPlacesService() {
   placesService = new google.maps.places.PlacesService(map);
 }
 
-export function handlePlaceClick(place, $placeResult) {
+export function handlePlaceClick({ placeData, $placeElement }) {
   if (lastInfoWindowOpen) {
     lastInfoWindowOpen.close();
   }
 
-  const marker = currentPlacesMarkers[place.id];
+  const marker = currentPlacesMarkers[placeData.id];
 
   const infoWindow = new google.maps.InfoWindow({
-    content: place.name
+    content: placeData.name
   });
 
   infoWindow.open(map, marker);
   lastInfoWindowOpen = infoWindow;
 
-  scrollToHighlightedPlace($placeResult);
-  setHighlightedPlace($placeResult);
+  scrollToHighlightedPlace($placeElement);
+  setHighlightedPlace($placeElement);
   setMapCenter(marker.position, { pan: true });
 }
 
@@ -44,32 +44,32 @@ function renderPlaces(places) {
     .sort((a, b) => {
       return b.rating - a.rating;
     })
-    .forEach(placeResult => {
-      const placeLocation = placeResult.geometry.location;
+    .forEach(placeData => {
+      const placeLocation = placeData.geometry.location;
 
       const marker = insertMarker(placeLocation, {
-        title: placeResult.name,
+        title: placeData.name,
         customMarkerURL
       });
 
       $placesResults.insertAdjacentHTML(
         "beforeend",
-        buildPlaceTemplate(placeResult)
+        buildPlaceTemplate(placeData)
       );
 
-      const $insertedPlaceResult = $placesResults.querySelector(
-        `[data-id="${placeResult.id}"]`
+      const $placeElement = $placesResults.querySelector(
+        `[data-id="${placeData.id}"]`
       );
 
-      $insertedPlaceResult.addEventListener("click", () =>
-        handlePlaceClick(placeResult, $insertedPlaceResult)
+      $placeElement.addEventListener("click", () =>
+        handlePlaceClick({ placeData, $placeElement })
       );
 
       marker.addListener("click", () =>
-        handlePlaceClick(placeResult, $insertedPlaceResult)
+        handlePlaceClick({ placeData, $placeElement })
       );
 
-      currentPlacesMarkers[placeResult.id] = marker;
+      currentPlacesMarkers[placeData.id] = marker;
     });
 
   toggleShowPlaces();
