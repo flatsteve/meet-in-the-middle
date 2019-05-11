@@ -25,7 +25,7 @@ export async function initLocationsAutocomplete() {
       lng: position.coords.longitude
     };
 
-    setMapCenter(locationLatLng);
+    setMapCenter({ locationLatLng });
 
     const circle = new google.maps.Circle({
       center: locationLatLng,
