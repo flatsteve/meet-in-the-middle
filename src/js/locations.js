@@ -72,8 +72,7 @@ export function handleAddressSelected({
   inputId,
   preSetCoordinates = false
 } = {}) {
-  let title;
-  let markerColour;
+  let title = "Location";
   let coordinates;
 
   // 'Your location' coordinates can also be set by getting the users geolocation
@@ -88,10 +87,8 @@ export function handleAddressSelected({
 
   if (inputId === "yourLocation") {
     title = "Your Location";
-    markerColour = "purple";
   } else {
     title = "Their Location";
-    markerColour = "pink";
   }
 
   locationInputs[inputId].coordinates = coordinates;
@@ -103,7 +100,7 @@ export function handleAddressSelected({
   locationInputs[inputId].marker = insertMarker({
     locationLatLng: coordinates,
     title,
-    markerColour
+    customMarkerHeight: 36
   });
 
   if (isLocationsComplete()) {
