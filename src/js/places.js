@@ -10,7 +10,7 @@ import {
 } from "./ui";
 import { placeResults } from "../../__fixtures__/places";
 
-import customMarkerURL from "../images/marker.png";
+import placeMarkerURL from "../images/marker.png";
 
 let placesService;
 let currentPlacesMarkers = {};
@@ -36,7 +36,11 @@ export function handlePlaceClick({ placeData, $placeElement }) {
 
   scrollToHighlightedPlace($placeElement);
   setHighlightedPlace($placeElement);
-  setMapCenter(marker.position, { pan: true });
+
+  setMapCenter({
+    locationLatLng: marker.position,
+    pan: true
+  });
 }
 
 function renderPlaces(places) {
@@ -45,11 +49,10 @@ function renderPlaces(places) {
       return b.rating - a.rating;
     })
     .forEach(placeData => {
-      const placeLocation = placeData.geometry.location;
-
-      const marker = insertMarker(placeLocation, {
+      const marker = insertMarker({
+        locationLatLng: placeData.geometry.location,
         title: placeData.name,
-        customMarkerURL
+        customMarkerURL: placeMarkerURL
       });
 
       $placesResults.insertAdjacentHTML(

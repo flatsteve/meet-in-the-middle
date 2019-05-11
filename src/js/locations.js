@@ -20,15 +20,15 @@ export async function initLocationsAutocomplete() {
 
     toggleLocationLoading(false);
 
-    const geoPosition = {
+    const locationLatLng = {
       lat: position.coords.latitude,
       lng: position.coords.longitude
     };
 
-    setMapCenter(geoPosition);
+    setMapCenter(locationLatLng);
 
     const circle = new google.maps.Circle({
-      center: geoPosition,
+      center: locationLatLng,
       radius: position.coords.accuracy
     });
 
@@ -100,7 +100,8 @@ export function handleAddressSelected({
     locationInputs[inputId].marker.setMap(null);
   }
 
-  locationInputs[inputId].marker = insertMarker(coordinates, {
+  locationInputs[inputId].marker = insertMarker({
+    locationLatLng: coordinates,
     title,
     markerColour
   });

@@ -1,6 +1,8 @@
 import { showNearbyPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
 
+import middleMarkerURL from "../images/middle.png";
+
 let map;
 let mapMarkers = [];
 
@@ -16,16 +18,14 @@ export function initMap() {
 /*
   Insert marker on the map and recenter to show the marker by default
 */
-export function insertMarker(
+export function insertMarker({
   locationLatLng,
-  {
-    recenter = true,
-    animation = "DROP",
-    title = "Location",
-    customMarkerURL = false,
-    markerColour = "red"
-  } = {}
-) {
+  recenter = true,
+  animation = "DROP",
+  title = "Location",
+  customMarkerURL = false,
+  markerColour = "red"
+} = {}) {
   let mapIcon;
 
   if (customMarkerURL) {
@@ -65,32 +65,33 @@ export function clearMarkers() {
   });
 }
 
-export function setMapCenter(geoLocation, { pan = false } = {}) {
+export function setMapCenter({ locationLatLng, pan = false } = {}) {
   if (pan) {
-    return map.panTo(geoLocation);
+    return map.panTo(locationLatLng);
   }
 
-  map.setCenter(geoLocation);
+  map.setCenter(locationLatLng);
 }
 
 export function showMiddlePoint(bounds) {
-  const centerPoint = bounds.getCenter();
+  const middlePoint = bounds.getCenter();
 
-  const centerPointMarker = insertMarker(centerPoint, {
+  const middlePointMarker = insertMarker({
+    locationLatLng: middlePoint,
+    customMarkerURL: middleMarkerURL,
     recenter: false,
     animation: "BOUNCE",
-    title: "The middle!",
-    markerColour: "blue"
+    title: "The Middle"
   });
 
   map.fitBounds(bounds);
 
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
-  showNearbyPlaces(centerPoint);
+  showNearbyPlaces(middlePoint);
 
-  // Stop the middle point marker from bouncing after 3 seconds
+  // Stop the middle point marker from bouncing after 3.2 seconds
   setTimeout(() => {
-    centerPointMarker.setAnimation(null);
-  }, 3000);
+    middlePointMarker.setAnimation(null);
+  }, 3200);
 }
