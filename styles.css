@@ -394,6 +394,10 @@ input[type="text"] {
   input[type="text"]:focus {
     outline: none; }
 
+input[type="radio"]:hover,
+input[type="radio"] + label:hover {
+  cursor: pointer; }
+
 #map {
   height: 50vh; }
   @media (min-width: 768px) {
@@ -474,12 +478,13 @@ input[type="text"] {
     .locations__radios {
       margin-top: 1.25rem; }
       .locations__radios p {
+        margin: 0;
         width: auto; } }
   .locations__radios__item {
     align-items: center;
     display: flex; }
     .locations__radios__item label {
-      margin: 0 0 0 0.25rem; }
+      margin: 0 0 0 0.4rem; }
 
 .your-location-wrapper {
   align-items: center;
