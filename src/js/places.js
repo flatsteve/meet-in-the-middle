@@ -8,7 +8,7 @@ import {
   showLocationsError,
   toggleShowPlaces
 } from "./ui";
-import { placeResults } from "../../__fixtures__/places";
+// import { placeResults } from "../../__fixtures__/places";
 
 import placeMarkerURL from "../images/marker.png";
 

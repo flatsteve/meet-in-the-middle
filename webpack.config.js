@@ -1,5 +1,9 @@
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
+
+const PUBLIC_PATH = "https://flatsteve.github.io/meet-in-the-middle/";
 
 module.exports = (env, args) => {
   return {
@@ -25,7 +29,7 @@ module.exports = (env, args) => {
         {
           test: /\.scss$/,
           use: [
-            // fallback to style-loader in development
+            // Fallback to style-loader in development
             args.mode === "production"
               ? MiniCssExtractPlugin.loader
               : "style-loader",
@@ -57,6 +61,18 @@ module.exports = (env, args) => {
       new HtmlWebpackPlugin({
         template: "./src/index.html",
         favicon: "./src/images/favicon.png"
+      }),
+      new CopyWebpackPlugin([
+        { from: "./src/images/pwa-icons", to: "images/icons" },
+        { from: "./src/manifest.json", to: "manifest.json" }
+      ]),
+      new SWPrecacheWebpackPlugin({
+        cacheId: "meet-in-the-middle",
+        dontCacheBustUrlsMatching: /\.\w{8}\./,
+        filename: "service-worker.js",
+        minify: true,
+        navigateFallback: PUBLIC_PATH + "index.html",
+        staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
       })
     ]
   };
