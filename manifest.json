@@ -1,19 +1,19 @@
 {
   "short_name": "Middle",
   "name": "Meet in the Middle",
-  "start_url": "/",
+  "start_url": "/meet-in-the-middle",
   "background_color": "#2750cb",
   "theme_color": "#2750cb",
   "display": "standalone",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/images/icons-192.png",
+      "src": "images/icons-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/icons-512.png",
+      "src": "images/icons-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
