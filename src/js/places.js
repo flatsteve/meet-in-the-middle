@@ -1,5 +1,5 @@
 import { map } from "../index";
-import { insertMarker, setMapCenter } from "./map";
+import { insertInfoWindow, insertMarker, setMapCenter } from "./map";
 import {
   buildPlaceTemplate,
   $placesResults,
@@ -14,25 +14,20 @@ import placeMarkerURL from "../images/marker.png";
 
 let placesService;
 let currentPlacesMarkers = {};
-let lastInfoWindowOpen;
+let lastPlaceInfoWindowOpen = null;
 
 export function initPlacesService() {
   placesService = new google.maps.places.PlacesService(map);
 }
 
 export function handlePlaceClick({ placeData, $placeElement }) {
-  if (lastInfoWindowOpen) {
-    lastInfoWindowOpen.close();
+  if (lastPlaceInfoWindowOpen) {
+    lastPlaceInfoWindowOpen.close();
   }
 
   const marker = currentPlacesMarkers[placeData.id];
-
-  const infoWindow = new google.maps.InfoWindow({
-    content: placeData.name
-  });
-
-  infoWindow.open(map, marker);
-  lastInfoWindowOpen = infoWindow;
+  const infoWindow = insertInfoWindow({ marker, content: placeData.name });
+  lastPlaceInfoWindowOpen = infoWindow;
 
   scrollToHighlightedPlace($placeElement);
   setHighlightedPlace($placeElement);
@@ -107,7 +102,7 @@ export function showNearbyPlaces(location) {
   Remove places from the DOM and clear references in memory
 */
 export function resetPlaces() {
-  lastInfoWindowOpen = null;
+  lastPlaceInfoWindowOpen = null;
   currentPlacesMarkers = {};
   $placesResults.innerHTML = "";
 }

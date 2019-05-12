@@ -53,6 +53,19 @@ export function insertMarker({
   return marker;
 }
 
+export function insertInfoWindow({ content, marker }) {
+  const infoWindow = new google.maps.InfoWindow({
+    content
+  });
+
+  infoWindow.open(map, marker);
+
+  return infoWindow;
+}
+
+/*
+  Clean all markers on the map
+*/
 export function clearMarkers() {
   mapMarkers.forEach(marker => {
     marker.setMap(null);
@@ -69,14 +82,19 @@ export function setMapCenter({ locationLatLng, pan = false } = {}) {
 
 export function showMiddlePoint(bounds) {
   const middlePoint = bounds.getCenter();
+  const title = "The Middle";
 
   const middlePointMarker = insertMarker({
     locationLatLng: middlePoint,
     customMarkerURL: middleMarkerURL,
     recenter: false,
     animation: "BOUNCE",
-    title: "The Middle"
+    title
   });
+
+  middlePointMarker.addListener("click", () =>
+    insertInfoWindow({ marker: middlePointMarker, content: title })
+  );
 
   map.fitBounds(bounds);
 
@@ -84,8 +102,8 @@ export function showMiddlePoint(bounds) {
 
   showNearbyPlaces(middlePoint);
 
-  // Stop the middle point marker from bouncing after 3.2 seconds
+  // Stop the middle point marker from bouncing after some seconds
   setTimeout(() => {
     middlePointMarker.setAnimation(null);
-  }, 3200);
+  }, 2700);
 }

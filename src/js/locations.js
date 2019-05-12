@@ -1,4 +1,9 @@
-import { insertMarker, showMiddlePoint, setMapCenter } from "./map";
+import {
+  insertInfoWindow,
+  insertMarker,
+  showMiddlePoint,
+  setMapCenter
+} from "./map";
 import { getGeoLocation } from "./geo";
 import {
   hideLocationsError,
@@ -97,11 +102,16 @@ export function handleAddressSelected({
     locationInputs[inputId].marker.setMap(null);
   }
 
-  locationInputs[inputId].marker = insertMarker({
+  const marker = insertMarker({
     locationLatLng: coordinates,
     title,
     customMarkerHeight: 36
   });
+
+  locationInputs[inputId].marker = marker;
+  marker.addListener("click", () =>
+    insertInfoWindow({ marker, content: title })
+  );
 
   if (isLocationsComplete()) {
     setMeetButtonDisabled(false);
