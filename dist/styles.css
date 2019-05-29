@@ -344,25 +344,28 @@ h4,
 h5 {
   font-weight: 300; }
 
+button {
+  border: none;
+  transition: all 0.3s ease-in; }
+  button:hover:enabled {
+    cursor: pointer; }
+  button:focus {
+    outline: none; }
+
 .button {
   background-color: #ff6b35;
-  border: none;
   box-shadow: 0 0.1rem 0.25rem 0 rgba(145, 134, 149, 0.5);
   color: #fff;
   border-radius: 0.5rem;
   font-size: 1rem;
-  padding: 1.25rem;
-  transition: all 0.3s ease-in; }
+  padding: 1.25rem; }
   .button:disabled {
     box-shadow: none;
     color: #fff;
     cursor: not-allowed; }
   .button:hover:enabled {
     box-shadow: none;
-    cursor: pointer;
     background-color: #e83e00; }
-  .button:focus {
-    outline: none; }
   .button--link {
     background-color: #fff;
     box-shadow: none;
@@ -370,8 +373,20 @@ h5 {
     padding: 0.25rem; }
     .button--link:hover:enabled {
       background-color: #fff;
-      color: #1b378b;
-      cursor: pointer; }
+      color: #1b378b; }
+
+.map-button {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5rem;
+  color: #2750cb;
+  display: none;
+  left: 50%;
+  margin-left: -6rem;
+  padding: 0.75rem;
+  position: absolute;
+  top: 0.25rem;
+  z-index: 9999;
+  width: 12rem; }
 
 ::placeholder {
   color: #786c7c;
@@ -397,6 +412,18 @@ input[type="text"] {
 input[type="radio"]:hover,
 input[type="radio"] + label:hover {
   cursor: pointer; }
+
+.pac-container {
+  box-shadow: 0px 5px 15px 5px rgba(145, 134, 149, 0.3);
+  border-top: none;
+  border-radius: 0.25rem; }
+
+.pac-item {
+  border-color: #e7e5e8;
+  font-family: "Roboto", sans-serif;
+  padding: 0.25rem; }
+  .pac-item:first-of-type {
+    border: none; }
 
 #map {
   height: 50vh; }
