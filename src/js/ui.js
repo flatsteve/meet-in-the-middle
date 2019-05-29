@@ -21,10 +21,6 @@ const $yourLocationInput = document.getElementById("yourLocation");
 const $meetButton = document.getElementById("meet");
 const $searchAgainButton = document.querySelector(".search-again");
 
-let uiState = {
-  placesShown: false
-};
-
 function resetUI() {
   clearMarkers();
   resetPlaces();
@@ -176,17 +172,15 @@ export function scrollToHighlightedPlace($placeResult) {
   });
 }
 
-export function toggleShowPlaces() {
-  if (uiState.placesShown) {
-    $locationsContainer.classList.remove("locations--hide");
-    $placesContainer.classList.remove("places--show");
-    uiState.placesShown = false;
-
-    resetUI();
-  } else {
+export function showPlaceResults({ show }) {
+  if (show) {
     $locationsContainer.classList.add("locations--hide");
     $placesContainer.classList.add("places--show");
-    uiState.placesShown = true;
+  } else {
+    $locationsContainer.classList.remove("locations--hide");
+    $placesContainer.classList.remove("places--show");
+
+    resetUI();
   }
 }
 
@@ -229,5 +223,7 @@ async function handleGeolocationIconClicked() {
 }
 
 $meetButton.addEventListener("click", handleMeetButtonClicked);
-$searchAgainButton.addEventListener("click", toggleShowPlaces);
+$searchAgainButton.addEventListener("click", () =>
+  showPlaceResults({ show: false })
+);
 $geolocationIconButton.addEventListener("click", handleGeolocationIconClicked);

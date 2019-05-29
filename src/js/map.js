@@ -1,4 +1,4 @@
-import { showNearbyPlaces } from "./places";
+import { showNearbyPlaces, resetPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
 
 import middleMarkerURL from "../images/middle.png";
@@ -24,6 +24,7 @@ export function insertMarker({
   recenter = true,
   animation = "DROP",
   title = "Location",
+  draggable = false,
   customMarkerURL = locationMarkerURL,
   customMarkerWidth = 25,
   customMarkerHeight = 25
@@ -35,9 +36,10 @@ export function insertMarker({
 
   const marker = new google.maps.Marker({
     position: locationLatLng,
-    map: map,
-    animation: google.maps.Animation[animation],
+    map,
     title,
+    draggable,
+    animation: google.maps.Animation[animation],
     icon: mapIcon
   });
 
@@ -89,6 +91,7 @@ export function showMiddlePoint(bounds) {
     customMarkerURL: middleMarkerURL,
     recenter: false,
     animation: "BOUNCE",
+    draggable: true,
     title
   });
 
@@ -101,6 +104,20 @@ export function showMiddlePoint(bounds) {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
   showNearbyPlaces(middlePoint);
+
+  // Listen for the middle marker being moved
+  google.maps.event.addListener(middlePointMarker, "dragend", position => {
+    // TODO show an overlay button asking to "Search here"
+
+    const newMiddlePoint = {
+      lat: position.latLng.lat(),
+      lng: position.latLng.lng()
+    };
+
+    resetPlaces();
+
+    showNearbyPlaces(newMiddlePoint);
+  });
 
   // Stop the middle point marker from bouncing after some seconds
   setTimeout(() => {

@@ -6,7 +6,7 @@ import {
   scrollToHighlightedPlace,
   setHighlightedPlace,
   showLocationsError,
-  toggleShowPlaces
+  showPlaceResults
 } from "./ui";
 // import { placeResults } from "../../__fixtures__/places";
 
@@ -70,7 +70,7 @@ function renderPlaces(places) {
       currentPlacesMarkers[placeData.id] = marker;
     });
 
-  toggleShowPlaces();
+  showPlaceResults({ show: true });
 }
 
 /*
@@ -99,12 +99,17 @@ export function showNearbyPlaces(location) {
 }
 
 /*
-  Remove places from the DOM and clear references in memory
+  Remove places and markers from the DOM and clear references in memory
 */
 export function resetPlaces() {
   lastPlaceInfoWindowOpen = null;
-  currentPlacesMarkers = {};
   $placesResults.innerHTML = "";
+
+  Object.keys(currentPlacesMarkers).forEach(key => {
+    currentPlacesMarkers[key].setMap(null);
+  });
+
+  currentPlacesMarkers = {};
 }
 
 export function testPlaces() {
