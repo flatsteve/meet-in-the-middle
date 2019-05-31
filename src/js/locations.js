@@ -1,7 +1,7 @@
 import {
   insertInfoWindow,
   insertMarker,
-  showMiddlePoint,
+  showMiddlePointAndPlaces,
   setMapCenter
 } from "./map";
 import { getGeoLocation } from "./geo";
@@ -11,6 +11,7 @@ import {
   setMeetButtonDisabled
 } from "./ui";
 import { LOCATION_INPUTS_INITIAL_VALUES, TABLET_WIDTH } from "./constants";
+import { scrollTop } from "./utils";
 
 let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
 
@@ -66,7 +67,9 @@ export function handleMeetButtonClicked() {
     bounds.extend(locationInputs[input].coordinates);
   }
 
-  showMiddlePoint({ bounds });
+  const middlePointLatLng = bounds.getCenter();
+
+  showMiddlePointAndPlaces({ middlePointLatLng });
 }
 
 /*
@@ -123,11 +126,7 @@ export function handleAddressSelected({
 */
 function handleInputFocus(inputElement) {
   if (window.innerWidth < TABLET_WIDTH) {
-    window.scrollTo({
-      top: inputElement.offsetTop,
-      left: 0,
-      behavior: "smooth"
-    });
+    scrollTop(inputElement.offsetTop);
   }
 }
 

@@ -6,8 +6,10 @@ import {
   scrollToHighlightedPlace,
   setHighlightedPlace,
   showLocationsError,
-  showPlaceResults
+  showPlaceResults,
+  showSearchAreaButton
 } from "./ui";
+import { PLACE_SEARCH_RADIUS } from "./constants";
 
 import placeMarkerURL from "../images/marker.png";
 
@@ -37,15 +39,19 @@ export function handlePlaceClick({ placeData, $placeElement }) {
   });
 }
 
-export function renderPlaces(places) {
-  places
+export function renderPlaces({ placeResults, bounds }) {
+  placeResults
     .sort((a, b) => {
       return b.rating - a.rating;
     })
     .forEach(placeData => {
-      const marker = insertMarker({
-        locationLatLng: placeData.geometry.location,
+      const placeLocationLatLng = placeData.geometry.location;
+      bounds.extend(placeLocationLatLng);
+
+      const placeMarker = insertMarker({
+        locationLatLng: placeLocationLatLng,
         title: placeData.name,
+        recenter: false,
         customMarkerURL: placeMarkerURL
       });
 
@@ -62,29 +68,30 @@ export function renderPlaces(places) {
         handlePlaceClick({ placeData, $placeElement })
       );
 
-      marker.addListener("click", () =>
+      placeMarker.addListener("click", () =>
         handlePlaceClick({ placeData, $placeElement })
       );
 
-      currentPlacesMarkers[placeData.id] = marker;
+      currentPlacesMarkers[placeData.id] = placeMarker;
     });
 
+  map.fitBounds(bounds);
   showPlaceResults({ show: true });
 }
 
 /*
   Shows places within a 500 meter radius of the target location (the 'middle')
 */
-export function showNearbyPlaces(location) {
+export function getNearbyPlaces({ middlePointLatLng, bounds }) {
   const type = document.querySelector('input[name="place-type"]:checked').value;
 
   const request = {
-    location,
-    radius: "500",
+    location: middlePointLatLng,
+    radius: PLACE_SEARCH_RADIUS,
     type
   };
 
-  placesService.nearbySearch(request, (results, status) => {
+  placesService.nearbySearch(request, (placeResults, status) => {
     if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
       showLocationsError(
         "Sorry we couldn't find anywhere nearby, please try searching again..."
@@ -92,15 +99,19 @@ export function showNearbyPlaces(location) {
     }
 
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      renderPlaces(results);
+      renderPlaces({ placeResults, bounds });
     }
   });
 }
 
-export function handleSearchAreaButtonClicked(newMiddleLocation) {
+export function handleSearchAreaButtonClicked(newMiddlePointLatLng) {
+  let bounds = new google.maps.LatLngBounds();
+  bounds.extend(newMiddlePointLatLng);
+
   resetPlaces();
 
-  showNearbyPlaces(newMiddleLocation);
+  getNearbyPlaces({ middlePointLatLng: newMiddlePointLatLng, bounds });
+  showSearchAreaButton({ hideImmediate: true });
 }
 
 /*

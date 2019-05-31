@@ -200,14 +200,26 @@ export function toggleLocationLoading(shouldShow) {
   }
 }
 
-export function showSearchAreaButton({ newMiddleLocation }) {
+export function showSearchAreaButton({
+  newMiddleLocation,
+  hideImmediate = false
+}) {
+  function resetSearchArea() {
+    $searchAreaButton.classList.remove("search-area-btn--show");
+    searchAreaLocation = null;
+  }
+
+  if (hideImmediate) {
+    resetSearchArea();
+    return clearTimeout(searchAreaButtonTimeout);
+  }
+
   if (searchAreaButtonTimeout) {
     clearTimeout(searchAreaButtonTimeout);
   }
 
   searchAreaButtonTimeout = setTimeout(() => {
-    $searchAreaButton.classList.remove("search-area-btn--show");
-    searchAreaLocation = null;
+    resetSearchArea();
   }, 5000);
 
   searchAreaLocation = newMiddleLocation;

@@ -1,6 +1,7 @@
-import { showNearbyPlaces } from "./places";
+import { getNearbyPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
 import { showSearchAreaButton } from "./ui";
+import { scrollTop } from "./utils";
 
 import middleMarkerURL from "../images/middle.png";
 import locationMarkerURL from "../images/location.png";
@@ -40,8 +41,8 @@ export function insertMarker({
     map,
     title,
     draggable,
-    animation: google.maps.Animation[animation],
-    icon: mapIcon
+    icon: mapIcon,
+    animation: google.maps.Animation[animation]
   });
 
   if (recenter) {
@@ -67,7 +68,7 @@ export function insertInfoWindow({ content, marker }) {
 }
 
 /*
-  Clean all markers on the map
+  Clear all markers on the map
 */
 export function clearMarkers() {
   mapMarkers.forEach(marker => {
@@ -83,16 +84,24 @@ export function setMapCenter({ locationLatLng, pan = false } = {}) {
   map.setCenter(locationLatLng);
 }
 
-export function showMiddlePoint({ bounds, showPlaces = true }) {
-  const middlePoint = bounds.getCenter();
+/*
+  Show the middle point and nearby places
+*/
+export function showMiddlePointAndPlaces({
+  middlePointLatLng,
+  showPlaces = true
+}) {
   const title = "The Middle";
 
+  let bounds = new google.maps.LatLngBounds();
+  bounds.extend(middlePointLatLng);
+
   if (showPlaces) {
-    showNearbyPlaces(middlePoint);
+    getNearbyPlaces({ middlePointLatLng, bounds });
   }
 
   const middlePointMarker = insertMarker({
-    locationLatLng: middlePoint,
+    locationLatLng: middlePointLatLng,
     customMarkerURL: middleMarkerURL,
     recenter: false,
     animation: "BOUNCE",
@@ -104,9 +113,7 @@ export function showMiddlePoint({ bounds, showPlaces = true }) {
     insertInfoWindow({ marker: middlePointMarker, content: title })
   );
 
-  map.fitBounds(bounds);
-
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  scrollTop(0);
 
   // Listen for the middle marker being moved
   google.maps.event.addListener(middlePointMarker, "dragend", position => {
@@ -121,5 +128,5 @@ export function showMiddlePoint({ bounds, showPlaces = true }) {
   // Stop the middle point marker from bouncing after some seconds
   setTimeout(() => {
     middlePointMarker.setAnimation(null);
-  }, 2700);
+  }, 1500);
 }
