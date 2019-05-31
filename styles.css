@@ -375,18 +375,21 @@ button {
       background-color: #fff;
       color: #1b378b; }
 
-.map-button {
+.search-area-btn {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0.5rem;
   color: #2750cb;
-  display: none;
   left: 50%;
   margin-left: -6rem;
   padding: 0.75rem;
   position: absolute;
+  opacity: 0;
   top: 0.25rem;
-  z-index: 9999;
-  width: 12rem; }
+  width: 12rem;
+  z-index: 0; }
+  .search-area-btn--show {
+    opacity: 1;
+    z-index: 9999; }
 
 ::placeholder {
   color: #786c7c;
