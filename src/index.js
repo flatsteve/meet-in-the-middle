@@ -2,7 +2,8 @@ import * as Sentry from "@sentry/browser";
 
 import { initMap } from "./js/map";
 import { initLocationsAutocomplete } from "./js/locations";
-import { initPlacesService, testPlaces } from "./js/places";
+import { initPlacesService } from "./js/places";
+// import { showFixtureData } from "./js/utils";
 
 import "./styles.scss";
 
@@ -23,4 +24,4 @@ if (process.env.NODE_ENV === "production") {
 export const map = initMap();
 initPlacesService();
 initLocationsAutocomplete();
-// testPlaces();
+// showFixtureData();

@@ -1,5 +1,6 @@
-import { showNearbyPlaces, resetPlaces } from "./places";
+import { showNearbyPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
+import { showSearchAreaButton } from "./ui";
 
 import middleMarkerURL from "../images/middle.png";
 import locationMarkerURL from "../images/location.png";
@@ -82,9 +83,13 @@ export function setMapCenter({ locationLatLng, pan = false } = {}) {
   map.setCenter(locationLatLng);
 }
 
-export function showMiddlePoint(bounds) {
+export function showMiddlePoint({ bounds, showPlaces = true }) {
   const middlePoint = bounds.getCenter();
   const title = "The Middle";
+
+  if (showPlaces) {
+    showNearbyPlaces(middlePoint);
+  }
 
   const middlePointMarker = insertMarker({
     locationLatLng: middlePoint,
@@ -103,20 +108,14 @@ export function showMiddlePoint(bounds) {
 
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
-  showNearbyPlaces(middlePoint);
-
   // Listen for the middle marker being moved
   google.maps.event.addListener(middlePointMarker, "dragend", position => {
-    // TODO show an overlay button asking to "Search here"
-
-    const newMiddlePoint = {
+    const newMiddleLocation = {
       lat: position.latLng.lat(),
       lng: position.latLng.lng()
     };
 
-    resetPlaces();
-
-    showNearbyPlaces(newMiddlePoint);
+    showSearchAreaButton({ newMiddleLocation });
   });
 
   // Stop the middle point marker from bouncing after some seconds

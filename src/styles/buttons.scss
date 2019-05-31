@@ -45,16 +45,21 @@ button {
   }
 }
 
-.map-button {
+.search-area-btn {
   background-color: rgba($white, 0.8);
   border-radius: 0.5rem;
   color: $blue;
-  display: none;
   left: 50%;
   margin-left: -6rem;
   padding: 0.75rem;
   position: absolute;
+  opacity: 0;
   top: 0.25rem;
-  z-index: 9999;
   width: 12rem;
+  z-index: 0;
+
+  &--show {
+    opacity: 1;
+    z-index: 9999;
+  }
 }

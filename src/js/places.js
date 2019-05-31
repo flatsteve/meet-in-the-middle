@@ -8,7 +8,6 @@ import {
   showLocationsError,
   showPlaceResults
 } from "./ui";
-// import { placeResults } from "../../__fixtures__/places";
 
 import placeMarkerURL from "../images/marker.png";
 
@@ -38,7 +37,7 @@ export function handlePlaceClick({ placeData, $placeElement }) {
   });
 }
 
-function renderPlaces(places) {
+export function renderPlaces(places) {
   places
     .sort((a, b) => {
       return b.rating - a.rating;
@@ -98,6 +97,12 @@ export function showNearbyPlaces(location) {
   });
 }
 
+export function handleSearchAreaButtonClicked(newMiddleLocation) {
+  resetPlaces();
+
+  showNearbyPlaces(newMiddleLocation);
+}
+
 /*
   Remove places and markers from the DOM and clear references in memory
 */
@@ -110,8 +115,4 @@ export function resetPlaces() {
   });
 
   currentPlacesMarkers = {};
-}
-
-export function testPlaces() {
-  renderPlaces(placeResults);
 }

@@ -1,5 +1,5 @@
 import { handleMeetButtonClicked, handleAddressSelected } from "./locations";
-import { resetPlaces } from "./places";
+import { resetPlaces, handleSearchAreaButtonClicked } from "./places";
 import { clearMarkers } from "./map";
 import { getGeoLocation } from "./geo";
 import { PLACE_IMG_WIDTH } from "./constants";
@@ -19,7 +19,11 @@ const $locationsForm = document.getElementById("locations-form");
 const $locationLoading = document.querySelector(".location-loading");
 const $yourLocationInput = document.getElementById("yourLocation");
 const $meetButton = document.getElementById("meet");
+const $searchAreaButton = document.getElementById("searchArea");
 const $searchAgainButton = document.querySelector(".search-again");
+
+let searchAreaLocation;
+let searchAreaButtonTimeout;
 
 function resetUI() {
   clearMarkers();
@@ -196,6 +200,20 @@ export function toggleLocationLoading(shouldShow) {
   }
 }
 
+export function showSearchAreaButton({ newMiddleLocation }) {
+  if (searchAreaButtonTimeout) {
+    clearTimeout(searchAreaButtonTimeout);
+  }
+
+  searchAreaButtonTimeout = setTimeout(() => {
+    $searchAreaButton.classList.remove("search-area-btn--show");
+    searchAreaLocation = null;
+  }, 5000);
+
+  searchAreaLocation = newMiddleLocation;
+  $searchAreaButton.classList.add("search-area-btn--show");
+}
+
 async function handleGeolocationIconClicked() {
   let position;
 
@@ -225,5 +243,8 @@ async function handleGeolocationIconClicked() {
 $meetButton.addEventListener("click", handleMeetButtonClicked);
 $searchAgainButton.addEventListener("click", () =>
   showPlaceResults({ show: false })
+);
+$searchAreaButton.addEventListener("click", () =>
+  handleSearchAreaButtonClicked(searchAreaLocation)
 );
 $geolocationIconButton.addEventListener("click", handleGeolocationIconClicked);

@@ -66,7 +66,7 @@ export function handleMeetButtonClicked() {
     bounds.extend(locationInputs[input].coordinates);
   }
 
-  showMiddlePoint(bounds);
+  showMiddlePoint({ bounds });
 }
 
 /*
