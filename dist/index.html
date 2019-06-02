@@ -42,7 +42,7 @@
             <div class="form-group">
               <label for="yourLocation">Your location</label>
 
-              <div class="your-location-wrapper">
+              <div class="input-with-icon-wrapper">
                 <input
                   type="text"
                   id="yourLocation"
@@ -74,6 +74,23 @@
               />
             </div>
           </div>
+
+          <div class="locations__new"></div>
+
+          <button class="button button--link add-location-button" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59 59">
+              <g fill="none" fill-rule="evenodd" stroke="#FF6B35">
+                <circle cx="29.5" cy="29.5" r="27.5" stroke-width="4" />
+                <path
+                  fill="#FF6B35"
+                  fill-rule="nonzero"
+                  d="M30 15c-.8956 0-1.6216.726-1.6216 1.6216v11.7568H16.6216C15.726 28.3784 15 29.1044 15 30c0 .8957.726 1.6217 1.6216 1.6217h11.7568v11.7567C28.3784 44.274 29.1044 45 30 45s1.6216-.726 1.6216-1.6216V31.6217h11.7568C44.274 31.6217 45 30.8957 45 30c0-.8956-.726-1.6216-1.6216-1.6216H31.6216V16.6216C31.6216 15.726 30.8956 15 30 15z"
+                />
+              </g>
+            </svg>
+
+            Add another location
+          </button>
 
           <div class="locations__radios">
             <p>We're looking for...</p>
@@ -111,7 +128,12 @@
           </div>
         </div>
 
-        <button id="meet" class="button" type="button" disabled="disabled">
+        <button
+          id="meet"
+          class="button meet-button"
+          type="button"
+          disabled="disabled"
+        >
           Meet in the Middle
         </button>
       </form>
@@ -169,11 +191,34 @@
             between your locations
           </li>
         </ol>
+
+        <p>
+          P.S. you can also drag the middle marker around to search another
+          area.
+        </p>
       </div>
     </div>
 
     <footer>
       <div class="container">
+        <svg
+          class="footer__logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 239 282"
+        >
+          <path
+            fill="#FF6B35"
+            fill-rule="nonzero"
+            stroke="#FF6B35"
+            stroke-width="10"
+            d="M120.0204 5C94.6531 5 74 25.653 74 51.0204c0 14.3674 8.5306 28.0612 19.3061 45.5714 7.8572 12.5715 16.6123 26.7143 23.5715 44L120.0204 148l3.1429-7.4082c7.4081-17.2857 16.1632-31.4285 23.7959-43.7755 10.7755-17.5102 19.0816-31.204 19.0816-45.7959C166.0408 25.6531 145.3878 5 120.0204 5zm21.102 88.2245c-6.7346 11-14.1428 23.1224-21.102 37.7143C113.2857 116.3469 105.6531 104 98.9184 93c-10.102-16.6122-18.1837-29.6327-18.1837-41.9796 0-21.551 17.5102-39.2857 39.2857-39.2857 21.7755 0 39.2857 17.5102 39.2857 39.2857 0 12.5714-8.0816 25.5918-18.1837 42.204z"
+          />
+          <path
+            fill="#FFFFFF"
+            d="M.4219 272L46.125 38.5625l74.5313 168.75 77.2031-168.75L238.9219 272h-33.6094l-20.9531-131.0625-64.2656 141.0469-62.4375-141.1875L34.3125 272z"
+          />
+        </svg>
+
         <small
           >Made with 🍻 by <a href="https://flatsteve.com/">FlatSteve</a></small
         ><br />
