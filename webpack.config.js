@@ -64,7 +64,8 @@ module.exports = (env, args) => {
       }),
       new CopyWebpackPlugin([
         { from: "./src/images/pwa-icons", to: "images/icons" },
-        { from: "./src/manifest.json", to: "manifest.json" }
+        { from: "./src/manifest.json", to: "manifest.json" },
+        { from: "./src/sitemap.xml", to: "sitemap.xml" }
       ]),
       new SWPrecacheWebpackPlugin({
         cacheId: "meet-in-the-middle",
