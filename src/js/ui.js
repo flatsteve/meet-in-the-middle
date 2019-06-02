@@ -1,4 +1,8 @@
-import { handleMeetButtonClicked, handleAddressSelected } from "./locations";
+import {
+  addLocationInput,
+  handleMeetButtonClicked,
+  handleAddressSelected
+} from "./locations";
 import { resetPlaces, handleSearchAreaButtonClicked } from "./places";
 import { clearMarkers } from "./markers";
 import { getGeoLocation } from "./geo";
@@ -13,18 +17,21 @@ import emptyStar from "../images/icons/empty-star.svg";
 export const $placesResults = document.querySelector(".places__results");
 const $placesContainer = document.querySelector(".places");
 const $locationsContainer = document.querySelector(".locations");
-const $geolocationIconButton = document.querySelector(
-  ".geolocation-icon-button"
-);
+const $newLocationsContainer = document.querySelector(".locations__new");
 const $locationsForm = document.getElementById("locations-form");
 const $locationLoading = document.querySelector(".location-loading");
 const $yourLocationInput = document.getElementById("yourLocation");
 const $meetButton = document.getElementById("meet");
 const $searchAreaButton = document.getElementById("searchArea");
+const $addLocationButton = document.querySelector(".add-location-button");
 const $searchAgainButton = document.querySelector(".search-again");
+const $geolocationIconButton = document.querySelector(
+  ".geolocation-icon-button"
+);
 
 let searchAreaLocation;
 let searchAreaButtonTimeout;
+let newLocationsIndex = 1;
 
 function resetUI() {
   clearMarkers();
@@ -122,12 +129,47 @@ export function buildPlaceTemplate(placeData) {
           <strong>${getPriceLevel(placeData)}</strong>
         </span>
       </p>
+      
       <p class="place__address">${placeData.vicinity}</p>
+
       <a href="${getPlaceMapURL(placeData)}" target="_blank">
         Open in Google Maps
       </a>
     </div>
   `;
+}
+
+export function addNewLocation() {
+  const index = newLocationsIndex++;
+  const newLocationInputId = `newLocationInput${index}`;
+  const removeLocationButtonId = `removeLocationButton${index}`;
+
+  const newLocationTemplate = `
+    <div class="form-group">
+      <label for="${newLocationInputId}">New location ${index}</label>
+
+      <div class="input-with-icon-wrapper">
+        <input
+          type="text"
+          id="${newLocationInputId}"
+          placeholder="e.g. ${index} Lombard Street"
+        />
+
+        <button class="remove-location-icon-button" id="${removeLocationButtonId}" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59 59">
+            <g fill="none" fill-rule="evenodd" stroke="#FF6B35">
+              <circle cx="29.5" cy="29.5" r="27.5" stroke-width="4"/>
+              <path fill="#FF6B35" fill-rule="nonzero" d="M40.6066 19.3934c-.6333-.6333-1.66-.6333-2.2933 0L30 27.7067l-8.3133-8.3133c-.6333-.6332-1.66-.6333-2.2933 0s-.6333 1.66 0 2.2933L27.7066 30l-8.3132 8.3133c-.6333.6333-.6333 1.66 0 2.2933s1.66.6333 2.2933 0L30 32.2934l8.3133 8.3132c.6332.6333 1.66.6333 2.2933 0s.6332-1.66 0-2.2933L32.2933 30l8.3133-8.3133c.6333-.6333.6333-1.66 0-2.2933z"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
+  `;
+
+  $newLocationsContainer.insertAdjacentHTML("beforeend", newLocationTemplate);
+
+  return { newLocationInputId, removeLocationButtonId };
 }
 
 export function hideLocationsError() {
@@ -264,4 +306,5 @@ $searchAgainButton.addEventListener("click", () =>
 $searchAreaButton.addEventListener("click", () =>
   handleSearchAreaButtonClicked(searchAreaLocation)
 );
+$addLocationButton.addEventListener("click", addLocationInput);
 $geolocationIconButton.addEventListener("click", handleGeolocationIconClicked);

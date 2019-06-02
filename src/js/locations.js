@@ -6,18 +6,19 @@ import {
 import { insertMarker } from "./markers";
 import { getGeoLocation } from "./geo";
 import {
+  addNewLocation,
   hideLocationsError,
   toggleLocationLoading,
   setMeetButtonDisabled
 } from "./ui";
-import { LOCATION_INPUTS_INITIAL_VALUES, TABLET_WIDTH } from "./constants";
+import { TABLET_WIDTH } from "./constants";
 import { scrollTop } from "./utils";
 
-let locationInputs = LOCATION_INPUTS_INITIAL_VALUES;
+let locationInputs = {};
+let geoLocationBounds;
 
 export async function initLocationsAutocomplete() {
   let position;
-  let bounds = null;
 
   try {
     toggleLocationLoading(true);
@@ -38,19 +39,34 @@ export async function initLocationsAutocomplete() {
       radius: position.coords.accuracy
     });
 
-    bounds = circle.getBounds();
+    geoLocationBounds = circle.getBounds();
   } catch (error) {
     toggleLocationLoading(false);
   }
 
-  locationInputs.yourLocation.ref = createAutocompleteInput({
+  createAutocompleteInput({
     inputId: "yourLocation",
-    bounds
+    geoLocationBounds
   });
 
-  locationInputs.theirLocation.ref = createAutocompleteInput({
+  createAutocompleteInput({
     inputId: "theirLocation",
-    bounds
+    geoLocationBounds
+  });
+}
+
+/*
+  Add a new location input 
+*/
+export function addLocationInput() {
+  const { newLocationInputId, removeLocationButtonId } = addNewLocation();
+
+  createAutocompleteInput({ inputId: newLocationInputId });
+
+  const $removeLocationButton = document.getElementById(removeLocationButtonId);
+
+  $removeLocationButton.addEventListener("click", () => {
+    console.log(newLocationInputId);
   });
 }
 
@@ -135,21 +151,27 @@ function handleInputFocus(inputElement) {
   function to fire when user selects a location - note that we only need the geometry
   of the selected place
 */
-function createAutocompleteInput({ inputId, bounds }) {
+function createAutocompleteInput({ inputId, geoLocationBounds = null }) {
   const inputElement = document.getElementById(inputId);
+
   inputElement.addEventListener("focus", () => handleInputFocus(inputElement));
 
   const inputAutocomplete = new google.maps.places.Autocomplete(inputElement, {
-    bounds,
+    bounds: geoLocationBounds,
     types: ["geocode"]
   });
 
+  locationInputs[inputId] = {
+    ref: inputAutocomplete,
+    coordinates: null,
+    marker: null
+  };
+
   inputAutocomplete.setFields(["geometry"]);
+
   inputAutocomplete.addListener("place_changed", () =>
     handleAddressSelected({ inputId })
   );
-
-  return inputAutocomplete;
 }
 
 /*

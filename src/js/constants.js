@@ -104,16 +104,3 @@ export const MAP_CONFIG = {
     }
   ]
 };
-
-export const LOCATION_INPUTS_INITIAL_VALUES = {
-  yourLocation: {
-    coordinates: null,
-    ref: null,
-    marker: null
-  },
-  theirLocation: {
-    coordinates: null,
-    ref: null,
-    marker: null
-  }
-};

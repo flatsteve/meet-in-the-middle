@@ -42,7 +42,7 @@
             <div class="form-group">
               <label for="yourLocation">Your location</label>
 
-              <div class="your-location-wrapper">
+              <div class="input-with-icon-wrapper">
                 <input
                   type="text"
                   id="yourLocation"
@@ -74,6 +74,23 @@
               />
             </div>
           </div>
+
+          <div class="locations__new"></div>
+
+          <button class="button button--link add-location-button" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59 59">
+              <g fill="none" fill-rule="evenodd" stroke="#FF6B35">
+                <circle cx="29.5" cy="29.5" r="27.5" stroke-width="4" />
+                <path
+                  fill="#FF6B35"
+                  fill-rule="nonzero"
+                  d="M30 15c-.8956 0-1.6216.726-1.6216 1.6216v11.7568H16.6216C15.726 28.3784 15 29.1044 15 30c0 .8957.726 1.6217 1.6216 1.6217h11.7568v11.7567C28.3784 44.274 29.1044 45 30 45s1.6216-.726 1.6216-1.6216V31.6217h11.7568C44.274 31.6217 45 30.8957 45 30c0-.8956-.726-1.6216-1.6216-1.6216H31.6216V16.6216C31.6216 15.726 30.8956 15 30 15z"
+                />
+              </g>
+            </svg>
+
+            Add another location
+          </button>
 
           <div class="locations__radios">
             <p>We're looking for...</p>
@@ -111,7 +128,12 @@
           </div>
         </div>
 
-        <button id="meet" class="button" type="button" disabled="disabled">
+        <button
+          id="meet"
+          class="button meet-button"
+          type="button"
+          disabled="disabled"
+        >
           Meet in the Middle
         </button>
       </form>
