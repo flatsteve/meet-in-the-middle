@@ -60,8 +60,17 @@ export async function initLocationsAutocomplete() {
   });
 }
 
+function handleRemoveLocation(index) {
+  const location = document.getElementById(
+    `${NEW_LOCATION_CONTAINER_PREFIX}${index}`
+  );
+
+  removeElement(location);
+  delete locationInputs[`${NEW_LOCATION_INPUT_PREFIX}${index}`];
+}
+
 /*
-  Add a new location input 
+  Add a new location input and setup listeners to remove
 */
 export function addLocationInput() {
   const index = addNewLocation();
@@ -76,11 +85,7 @@ export function addLocationInput() {
   );
 
   $removeLocationButton.addEventListener("click", () => {
-    const location = document.getElementById(
-      `${NEW_LOCATION_CONTAINER_PREFIX}${index}`
-    );
-
-    removeElement(location);
+    handleRemoveLocation(index);
   });
 }
 
