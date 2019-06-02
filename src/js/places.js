@@ -10,7 +10,7 @@ import {
   showPlaceResults,
   showSearchAreaButton
 } from "./ui";
-import { PLACE_SEARCH_RADIUS } from "./constants";
+import { MIN_ZOOM_LEVEL, PLACE_SEARCH_RADIUS } from "./constants";
 
 import placeMarkerURL from "../images/marker.png";
 
@@ -76,7 +76,13 @@ export function renderPlaces({ placeResults, bounds }) {
       currentPlacesMarkers[placeData.id] = placeMarker;
     });
 
+  // Fit the bounds of the middle plus places then zoom out if too close (higher number)
   map.fitBounds(bounds);
+
+  if (map.getZoom() > MIN_ZOOM_LEVEL) {
+    map.setOptions({ zoom: MIN_ZOOM_LEVEL });
+  }
+
   showPlaceResults({ show: true });
 }
 

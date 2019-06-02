@@ -254,6 +254,9 @@ async function handleGeolocationIconClicked() {
   $yourLocationInput.value = "Current location";
 }
 
+/* 
+  Event listeners
+*/
 $meetButton.addEventListener("click", handleMeetButtonClicked);
 $searchAgainButton.addEventListener("click", () =>
   showPlaceResults({ show: false })
