@@ -3,6 +3,9 @@ export const TABLET_WIDTH = 768;
 export const PLACE_IMG_WIDTH = 512;
 export const PLACE_SEARCH_RADIUS = "500";
 export const MIN_ZOOM_LEVEL = 15;
+export const NEW_LOCATION_CONTAINER_PREFIX = "newLocationContainer";
+export const NEW_LOCATION_INPUT_PREFIX = "newLocationInput";
+export const REMOVE_LOCATION_BUTTON_PREFIX = "removeLocationButton";
 
 export const MAP_CONFIG = {
   center: CENTRAL_LND_COORDS,

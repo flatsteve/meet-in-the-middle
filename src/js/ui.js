@@ -6,8 +6,13 @@ import {
 import { resetPlaces, handleSearchAreaButtonClicked } from "./places";
 import { clearMarkers } from "./markers";
 import { getGeoLocation } from "./geo";
-import { PLACE_IMG_WIDTH } from "./constants";
-import { scrollTop } from "./utils";
+import {
+  NEW_LOCATION_CONTAINER_PREFIX,
+  NEW_LOCATION_INPUT_PREFIX,
+  REMOVE_LOCATION_BUTTON_PREFIX,
+  PLACE_IMG_WIDTH
+} from "./constants";
+import { removeElement, scrollTop } from "./utils";
 
 import spinner from "../images/icons/spinner.svg";
 import fullStar from "../images/icons/full-star.svg";
@@ -36,8 +41,10 @@ let newLocationsIndex = 1;
 function resetUI() {
   clearMarkers();
   resetPlaces();
-  $locationsForm.reset();
   setMeetButtonDisabled(true);
+  $locationsForm.reset();
+  $newLocationsContainer.innerHTML = "";
+  newLocationsIndex = 1;
 }
 
 function getPlacePhoto(placeData) {
@@ -141,12 +148,13 @@ export function buildPlaceTemplate(placeData) {
 
 export function addNewLocation() {
   const index = newLocationsIndex++;
-  const newLocationInputId = `newLocationInput${index}`;
-  const removeLocationButtonId = `removeLocationButton${index}`;
+  const newLocationContainerId = `${NEW_LOCATION_CONTAINER_PREFIX}${index}`;
+  const newLocationInputId = `${NEW_LOCATION_INPUT_PREFIX}${index}`;
+  const removeLocationButtonId = `${REMOVE_LOCATION_BUTTON_PREFIX}${index}`;
 
   const newLocationTemplate = `
-    <div class="form-group">
-      <label for="${newLocationInputId}">New location ${index}</label>
+    <div class="form-group" id="${newLocationContainerId}">
+      <label for="${newLocationInputId}">New location</label>
 
       <div class="input-with-icon-wrapper">
         <input
@@ -169,14 +177,14 @@ export function addNewLocation() {
 
   $newLocationsContainer.insertAdjacentHTML("beforeend", newLocationTemplate);
 
-  return { newLocationInputId, removeLocationButtonId };
+  return index;
 }
 
 export function hideLocationsError() {
   const errorMessage = document.querySelector(".locations__error");
 
   if (document.querySelector(".locations__error")) {
-    errorMessage.parentElement.removeChild(errorMessage);
+    removeElement(errorMessage);
   }
 }
 

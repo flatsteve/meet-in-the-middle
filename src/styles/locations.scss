@@ -43,7 +43,6 @@
     max-width: none;
 
     .form-group {
-      margin-bottom: 0;
       width: auto;
     }
 
@@ -77,6 +76,16 @@
     .form-group:last-of-type {
       margin-left: 1.25rem;
     }
+  }
+}
+
+.locations__new {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @include wider($tablet) {
+    margin-right: -2.5rem;
   }
 }
 

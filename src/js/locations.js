@@ -11,8 +11,13 @@ import {
   toggleLocationLoading,
   setMeetButtonDisabled
 } from "./ui";
-import { TABLET_WIDTH } from "./constants";
-import { scrollTop } from "./utils";
+import {
+  NEW_LOCATION_CONTAINER_PREFIX,
+  NEW_LOCATION_INPUT_PREFIX,
+  REMOVE_LOCATION_BUTTON_PREFIX,
+  TABLET_WIDTH
+} from "./constants";
+import { removeElement, scrollTop } from "./utils";
 
 let locationInputs = {};
 let geoLocationBounds;
@@ -59,14 +64,23 @@ export async function initLocationsAutocomplete() {
   Add a new location input 
 */
 export function addLocationInput() {
-  const { newLocationInputId, removeLocationButtonId } = addNewLocation();
+  const index = addNewLocation();
 
-  createAutocompleteInput({ inputId: newLocationInputId });
+  createAutocompleteInput({
+    inputId: `${NEW_LOCATION_INPUT_PREFIX}${index}`,
+    geoLocationBounds
+  });
 
-  const $removeLocationButton = document.getElementById(removeLocationButtonId);
+  const $removeLocationButton = document.getElementById(
+    `${REMOVE_LOCATION_BUTTON_PREFIX}${index}`
+  );
 
   $removeLocationButton.addEventListener("click", () => {
-    console.log(newLocationInputId);
+    const location = document.getElementById(
+      `${NEW_LOCATION_CONTAINER_PREFIX}${index}`
+    );
+
+    removeElement(location);
   });
 }
 

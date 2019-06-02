@@ -6,6 +6,10 @@ export function scrollTop(topPosition) {
   window.scrollTo({ top: topPosition, left: 0, behavior: "smooth" });
 }
 
+export function removeElement(element) {
+  element.parentElement.removeChild(element);
+}
+
 export function showFixtureData() {
   let bounds = new google.maps.LatLngBounds();
 
