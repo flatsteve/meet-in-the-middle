@@ -620,7 +620,17 @@ input[type="radio"] + label:hover {
 .welcome {
   border-top: 1px solid #dbd8dc;
   margin: 3.75rem 0;
-  padding-top: 1.25rem; }
+  padding-top: 2.5rem; }
+  .welcome__logo {
+    align-items: center;
+    display: flex;
+    flex-direction: column; }
+    .welcome__logo svg {
+      width: 4rem; }
+    .welcome__logo h1 {
+      margin: 0.25rem 0 0; }
+  .welcome__subtitle {
+    text-align: center; }
   .welcome ul,
   .welcome ol {
     padding-left: 1.25rem; }
