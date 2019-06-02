@@ -1,13 +1,12 @@
+import { insertMarker } from "./markers";
 import { getNearbyPlaces } from "./places";
 import { MAP_CONFIG } from "./constants";
 import { showSearchAreaButton } from "./ui";
 import { scrollTop } from "./utils";
 
 import middleMarkerURL from "../images/middle.png";
-import locationMarkerURL from "../images/location.png";
 
 let map;
-let mapMarkers = [];
 
 /*
   Initialize the map (runs after Google Maps is synchronously loaded)
@@ -18,45 +17,6 @@ export function initMap() {
   return map;
 }
 
-/*
-  Insert marker on the map and recenter to show the marker by default
-*/
-export function insertMarker({
-  locationLatLng,
-  recenter = true,
-  animation = "DROP",
-  title = "Location",
-  draggable = false,
-  customMarkerURL = locationMarkerURL,
-  customMarkerWidth = 25,
-  customMarkerHeight = 25
-} = {}) {
-  const mapIcon = {
-    url: customMarkerURL,
-    scaledSize: new google.maps.Size(customMarkerWidth, customMarkerHeight)
-  };
-
-  const marker = new google.maps.Marker({
-    position: locationLatLng,
-    map,
-    title,
-    draggable,
-    icon: mapIcon,
-    animation: google.maps.Animation[animation]
-  });
-
-  if (recenter) {
-    map.setOptions({
-      center: locationLatLng,
-      zoom: 15
-    });
-  }
-
-  mapMarkers.push(marker);
-
-  return marker;
-}
-
 export function insertInfoWindow({ content, marker }) {
   const infoWindow = new google.maps.InfoWindow({
     content
@@ -65,15 +25,6 @@ export function insertInfoWindow({ content, marker }) {
   infoWindow.open(map, marker);
 
   return infoWindow;
-}
-
-/*
-  Clear all markers on the map
-*/
-export function clearMarkers() {
-  mapMarkers.forEach(marker => {
-    marker.setMap(null);
-  });
 }
 
 export function setMapCenter({ locationLatLng, pan = false } = {}) {

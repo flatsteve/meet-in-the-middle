@@ -1,8 +1,9 @@
 import { handleMeetButtonClicked, handleAddressSelected } from "./locations";
 import { resetPlaces, handleSearchAreaButtonClicked } from "./places";
-import { clearMarkers } from "./map";
+import { clearMarkers } from "./markers";
 import { getGeoLocation } from "./geo";
 import { PLACE_IMG_WIDTH } from "./constants";
+import { scrollTop } from "./utils";
 
 import spinner from "../images/icons/spinner.svg";
 import fullStar from "../images/icons/full-star.svg";
@@ -185,6 +186,7 @@ export function showPlaceResults({ show }) {
     $placesContainer.classList.remove("places--show");
 
     resetUI();
+    scrollTop(0);
   }
 }
 

@@ -1,9 +1,9 @@
 import {
   insertInfoWindow,
-  insertMarker,
   showMiddlePointAndPlaces,
   setMapCenter
 } from "./map";
+import { insertMarker } from "./markers";
 import { getGeoLocation } from "./geo";
 import {
   hideLocationsError,

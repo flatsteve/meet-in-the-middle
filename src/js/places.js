@@ -1,5 +1,6 @@
 import { map } from "../index";
-import { insertInfoWindow, insertMarker, setMapCenter } from "./map";
+import { insertInfoWindow, setMapCenter } from "./map";
+import { insertMarker } from "./markers";
 import {
   buildPlaceTemplate,
   $placesResults,
