@@ -160,6 +160,7 @@ export function addNewLocation() {
         <input
           type="text"
           id="${newLocationInputId}"
+          class="input"
           placeholder="e.g. ${index} Lombard Street"
         />
 

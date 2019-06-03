@@ -11,6 +11,7 @@ import {
   toggleLocationLoading,
   setMeetButtonDisabled
 } from "./ui";
+import { validateLocationsForm } from "./validation";
 import {
   NEW_LOCATION_CONTAINER_PREFIX,
   NEW_LOCATION_INPUT_PREFIX,
@@ -92,9 +93,11 @@ export function addLocationInput() {
 /*
   Meet in the Middle was clicked
 */
-export function handleMeetButtonClicked() {
+export function handleMeetButtonClicked(event) {
   // Clear any previous errors getting the meeting point
   hideLocationsError();
+
+  return validateLocationsForm({ event, inputs: locationInputs });
 
   let bounds = new google.maps.LatLngBounds();
 
@@ -120,7 +123,8 @@ export function handleAddressSelected({
 
   // 'Your location' coordinates can also be set by getting the users geolocation
   if (!preSetCoordinates) {
-    const place = locationInputs[inputId].ref.getPlace().geometry.location;
+    const place = locationInputs[inputId].autocomplete.getPlace().geometry
+      .location;
     const lat = place.lat();
     const lng = place.lng();
     coordinates = { lat, lng };
@@ -181,7 +185,8 @@ function createAutocompleteInput({ inputId, geoLocationBounds = null }) {
   });
 
   locationInputs[inputId] = {
-    ref: inputAutocomplete,
+    autocomplete: inputAutocomplete,
+    element: inputElement,
     coordinates: null,
     marker: null
   };

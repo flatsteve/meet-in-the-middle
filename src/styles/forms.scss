@@ -11,18 +11,22 @@ label {
   margin-bottom: 0.25rem;
 }
 
-input[type="text"] {
+.input {
   background-color: lighten($grey, 40%);
-  border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
   min-width: 14rem;
   padding: 0.75rem;
+  position: relative;
   transition: border 0.3s ease-in;
   width: 100%;
 
   &:focus {
     outline: none;
+  }
+
+  &--invalid {
+    border-color: red;
   }
 }
 
