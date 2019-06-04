@@ -46,8 +46,12 @@
                 <input
                   type="text"
                   id="yourLocation"
+                  class="input"
                   placeholder="e.g. 17 Cherry Tree Lane"
+                  tabindex="1"
                 />
+
+                <small class="input__error"></small>
 
                 <button class="geolocation-icon-button" type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 64">
@@ -70,8 +74,12 @@
               <input
                 type="text"
                 id="theirLocation"
+                class="input"
                 placeholder="e.g. 221B Baker St"
+                tabindex="2"
               />
+
+              <small class="input__error"></small>
             </div>
           </div>
 
@@ -128,12 +136,7 @@
           </div>
         </div>
 
-        <button
-          id="meet"
-          class="button meet-button"
-          type="button"
-          disabled="disabled"
-        >
+        <button id="meet" class="button meet-button" type="button" tabindex="3">
           Meet in the Middle
         </button>
       </form>
