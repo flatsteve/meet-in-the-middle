@@ -5,6 +5,10 @@
   font-weight: 300;
 }
 
+.form-group {
+  position: relative;
+}
+
 label {
   color: $blue;
   display: block;
@@ -13,20 +17,35 @@ label {
 
 .input {
   background-color: lighten($grey, 40%);
-  border-radius: 0.5rem;
+  border: none;
+  border-left: 2px solid transparent;
   font-size: 1rem;
   min-width: 14rem;
   padding: 0.75rem;
-  position: relative;
-  transition: border 0.3s ease-in;
+  transition: border 0.2s ease-in;
   width: 100%;
 
   &:focus {
+    border-left: 2px solid transparent;
     outline: none;
+
+    ~ .input__error {
+      opacity: 0;
+    }
+  }
+
+  &__error {
+    bottom: -1.25rem;
+    color: $red;
+    left: 0;
+    margin: 0;
+    opacity: 1;
+    position: absolute;
+    transition: opacity 0.2s ease-in;
   }
 
   &--invalid {
-    border-color: red;
+    border-left: 2px solid $red;
   }
 }
 

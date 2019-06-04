@@ -41,7 +41,6 @@ let newLocationsIndex = 1;
 function resetUI() {
   clearMarkers();
   resetPlaces();
-  setMeetButtonDisabled(true);
   $locationsForm.reset();
   $newLocationsContainer.innerHTML = "";
   newLocationsIndex = 1;
@@ -164,6 +163,8 @@ export function addNewLocation() {
           placeholder="e.g. ${index} Lombard Street"
         />
 
+        <small class="input__error"></small>
+
         <button class="remove-location-icon-button" id="${removeLocationButtonId}" type="button">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59 59">
             <g fill="none" fill-rule="evenodd" stroke="#FF6B35">
@@ -194,14 +195,6 @@ export function showLocationsError(message) {
     "beforebegin",
     `<p class="locations__error">${message}</p>`
   );
-}
-
-export function setMeetButtonDisabled(shouldBeDisabled) {
-  if (shouldBeDisabled) {
-    $meetButton.disabled = true;
-  } else {
-    $meetButton.disabled = false;
-  }
 }
 
 export function setHighlightedPlace($placeResult) {

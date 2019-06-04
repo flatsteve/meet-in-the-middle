@@ -8,8 +8,7 @@ import { getGeoLocation } from "./geo";
 import {
   addNewLocation,
   hideLocationsError,
-  toggleLocationLoading,
-  setMeetButtonDisabled
+  toggleLocationLoading
 } from "./ui";
 import { validateLocationsForm } from "./validation";
 import {
@@ -93,11 +92,15 @@ export function addLocationInput() {
 /*
   Meet in the Middle was clicked
 */
-export function handleMeetButtonClicked(event) {
+export function handleMeetButtonClicked() {
   // Clear any previous errors getting the meeting point
   hideLocationsError();
 
-  return validateLocationsForm({ event, inputs: locationInputs });
+  const hasError = validateLocationsForm({ inputs: locationInputs });
+
+  if (hasError) {
+    return;
+  }
 
   let bounds = new google.maps.LatLngBounds();
 
@@ -154,10 +157,6 @@ export function handleAddressSelected({
   marker.addListener("click", () =>
     insertInfoWindow({ marker, content: title })
   );
-
-  if (isLocationsComplete()) {
-    setMeetButtonDisabled(false);
-  }
 }
 
 /*
@@ -177,8 +176,6 @@ function handleInputFocus(inputElement) {
 function createAutocompleteInput({ inputId, geoLocationBounds = null }) {
   const inputElement = document.getElementById(inputId);
 
-  inputElement.addEventListener("focus", () => handleInputFocus(inputElement));
-
   const inputAutocomplete = new google.maps.places.Autocomplete(inputElement, {
     bounds: geoLocationBounds,
     types: ["geocode"]
@@ -193,20 +190,13 @@ function createAutocompleteInput({ inputId, geoLocationBounds = null }) {
 
   inputAutocomplete.setFields(["geometry"]);
 
-  inputAutocomplete.addListener("place_changed", () =>
-    handleAddressSelected({ inputId })
+  inputAutocomplete.addListener("place_changed", () => {
+    handleAddressSelected({ inputId });
+    validateLocationsForm({ inputs: locationInputs });
+  });
+
+  inputElement.addEventListener("focus", () => handleInputFocus(inputElement));
+  inputElement.addEventListener("blur", () =>
+    validateLocationsForm({ inputs: locationInputs })
   );
-}
-
-/*
-  Validation function - returns false is any input has no coordinates
-*/
-function isLocationsComplete() {
-  for (let inputKey in locationInputs) {
-    if (!locationInputs[inputKey].coordinates) {
-      return false;
-    }
-  }
-
-  return true;
 }
