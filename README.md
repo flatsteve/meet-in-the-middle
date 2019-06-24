@@ -7,3 +7,7 @@ Do you ever plan to meet up with friends and they suggest somewhere two minutes 
 ### Development 
 
 * Start dev server: `npm run dev`
+
+### Deployment
+
+* Deploy to GH pages: `npm run deploy`
