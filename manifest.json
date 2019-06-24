@@ -1,7 +1,7 @@
 {
   "short_name": "Middle",
   "name": "Meet in the Middle",
-  "start_url": "/",
+  "start_url": "/meet-in-the-middle",
   "background_color": "#2750cb",
   "theme_color": "#2750cb",
   "display": "standalone",
