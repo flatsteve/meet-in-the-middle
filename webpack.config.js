@@ -15,7 +15,8 @@ module.exports = (env, args) => {
     devtool: "source-map",
     devServer: {
       open: true,
-      hotOnly: true
+      hotOnly: true,
+      port: 9000
     },
     module: {
       rules: [
