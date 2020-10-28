@@ -15,11 +15,11 @@ export function insertMarker({
   draggable = false,
   customMarkerURL = locationMarkerURL,
   customMarkerWidth = 25,
-  customMarkerHeight = 25
+  customMarkerHeight = 25,
 } = {}) {
   const mapIcon = {
     url: customMarkerURL,
-    scaledSize: new google.maps.Size(customMarkerWidth, customMarkerHeight)
+    scaledSize: new google.maps.Size(customMarkerWidth, customMarkerHeight),
   };
 
   const marker = new google.maps.Marker({
@@ -28,13 +28,13 @@ export function insertMarker({
     title,
     draggable,
     icon: mapIcon,
-    animation: google.maps.Animation[animation]
+    animation: google.maps.Animation[animation],
   });
 
   if (recenter) {
     map.setOptions({
       center: locationLatLng,
-      zoom: 15
+      zoom: 15,
     });
   }
 
@@ -47,7 +47,7 @@ export function insertMarker({
   Clear all markers on the map
 */
 export function clearMarkers() {
-  mapMarkers.forEach(marker => {
+  mapMarkers.forEach((marker) => {
     marker.setMap(null);
   });
 }

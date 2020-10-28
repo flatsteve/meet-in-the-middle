@@ -8,7 +8,7 @@ import {
   setHighlightedPlace,
   showLocationsError,
   showPlaceResults,
-  showSearchAreaButton
+  showSearchAreaButton,
 } from "./ui";
 import { MIN_ZOOM_LEVEL, PLACE_SEARCH_RADIUS } from "./constants";
 
@@ -27,7 +27,7 @@ export function handlePlaceClick({ placeData, $placeElement }) {
     lastPlaceInfoWindowOpen.close();
   }
 
-  const marker = currentPlacesMarkers[placeData.id];
+  const marker = currentPlacesMarkers[placeData.place_id];
   const infoWindow = insertInfoWindow({ marker, content: placeData.name });
   lastPlaceInfoWindowOpen = infoWindow;
 
@@ -36,7 +36,7 @@ export function handlePlaceClick({ placeData, $placeElement }) {
 
   setMapCenter({
     locationLatLng: marker.position,
-    pan: true
+    pan: true,
   });
 }
 
@@ -45,7 +45,7 @@ export function renderPlaces({ placeResults, bounds }) {
     .sort((a, b) => {
       return b.rating - a.rating;
     })
-    .forEach(placeData => {
+    .forEach((placeData) => {
       const placeLocationLatLng = placeData.geometry.location;
       bounds.extend(placeLocationLatLng);
 
@@ -53,7 +53,7 @@ export function renderPlaces({ placeResults, bounds }) {
         locationLatLng: placeLocationLatLng,
         title: placeData.name,
         recenter: false,
-        customMarkerURL: placeMarkerURL
+        customMarkerURL: placeMarkerURL,
       });
 
       $placesResults.insertAdjacentHTML(
@@ -62,7 +62,7 @@ export function renderPlaces({ placeResults, bounds }) {
       );
 
       const $placeElement = $placesResults.querySelector(
-        `[data-id="${placeData.id}"]`
+        `[data-id="${placeData.place_id}"]`
       );
 
       $placeElement.addEventListener("click", () =>
@@ -73,7 +73,7 @@ export function renderPlaces({ placeResults, bounds }) {
         handlePlaceClick({ placeData, $placeElement })
       );
 
-      currentPlacesMarkers[placeData.id] = placeMarker;
+      currentPlacesMarkers[placeData.place_id] = placeMarker;
     });
 
   // Fit the bounds of the middle plus places then zoom out if too close (higher number)
@@ -95,7 +95,7 @@ export function getNearbyPlaces({ middlePointLatLng, bounds }) {
   const request = {
     location: middlePointLatLng,
     radius: PLACE_SEARCH_RADIUS,
-    type
+    type,
   };
 
   placesService.nearbySearch(request, (placeResults, status) => {
@@ -128,7 +128,7 @@ export function resetPlaces() {
   lastPlaceInfoWindowOpen = null;
   $placesResults.innerHTML = "";
 
-  Object.keys(currentPlacesMarkers).forEach(key => {
+  Object.keys(currentPlacesMarkers).forEach((key) => {
     currentPlacesMarkers[key].setMap(null);
   });
 

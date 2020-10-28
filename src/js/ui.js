@@ -1,7 +1,7 @@
 import {
   addLocationInput,
   handleMeetButtonClicked,
-  handleAddressSelected
+  handleAddressSelected,
 } from "./locations";
 import { resetPlaces, handleSearchAreaButtonClicked } from "./places";
 import { clearMarkers } from "./markers";
@@ -10,7 +10,7 @@ import {
   NEW_LOCATION_CONTAINER_PREFIX,
   NEW_LOCATION_INPUT_PREFIX,
   REMOVE_LOCATION_BUTTON_PREFIX,
-  PLACE_IMG_WIDTH
+  PLACE_IMG_WIDTH,
 } from "./constants";
 import { removeElement, scrollTop } from "./utils";
 
@@ -53,7 +53,7 @@ function getPlacePhoto(placeData) {
 
   if (placeData.photos && placeData.photos[0].getUrl) {
     const placeImageURL = placeData.photos[0].getUrl({
-      maxWidth: PLACE_IMG_WIDTH
+      maxWidth: PLACE_IMG_WIDTH,
     });
 
     return `<div class="place__image" style="background-image: url(${placeImageURL})"></div>`;
@@ -80,9 +80,7 @@ function getPriceLevel(placeData) {
 }
 
 function getPlaceMapURL(placeData) {
-  return `https://www.google.com/maps/search/?api=1&query=${
-    placeData.name
-  }&query_place_id=${placeData.place_id}`;
+  return `https://www.google.com/maps/search/?api=1&query=${placeData.name}&query_place_id=${placeData.place_id}`;
 }
 
 /*
@@ -118,7 +116,7 @@ function getPlaceStarRating(rating) {
 
 export function buildPlaceTemplate(placeData) {
   return `
-    <div class="place" data-id="${placeData.id}">
+    <div class="place" data-id="${placeData.place_id}">
       ${getPlacePhoto(placeData)}
 
       <h3 class="place__title">${placeData.name}</h3>
@@ -217,7 +215,7 @@ export function scrollToHighlightedPlace($placeResult) {
   $placesResults.scrollTo({
     top: 0,
     left: leftOffset,
-    behavior: "smooth"
+    behavior: "smooth",
   });
 }
 
@@ -248,7 +246,7 @@ export function toggleLocationLoading(shouldShow) {
 
 export function showSearchAreaButton({
   newMiddleLocation,
-  hideImmediate = false
+  hideImmediate = false,
 }) {
   function resetSearchArea() {
     $searchAreaButton.classList.remove("search-area-btn--show");
@@ -287,12 +285,12 @@ async function handleGeolocationIconClicked() {
 
   const coordinates = {
     lat: position.coords.latitude,
-    lng: position.coords.longitude
+    lng: position.coords.longitude,
   };
 
   handleAddressSelected({
     inputId: "yourLocation",
-    preSetCoordinates: coordinates
+    preSetCoordinates: coordinates,
   });
 
   $yourLocationInput.value = "Current location";

@@ -10,13 +10,13 @@ module.exports = (env, args) => {
     output: {
       path: __dirname + "/dist",
       filename: "[name].js",
-      sourceMapFilename: "[name].js.map"
+      sourceMapFilename: "[name].hash:8].map",
     },
     devtool: "source-map",
     devServer: {
       open: true,
       hotOnly: true,
-      port: 9000
+      port: 9000,
     },
     module: {
       rules: [
@@ -24,8 +24,8 @@ module.exports = (env, args) => {
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
-          }
+            loader: "babel-loader",
+          },
         },
         {
           test: /\.scss$/,
@@ -35,8 +35,8 @@ module.exports = (env, args) => {
               ? MiniCssExtractPlugin.loader
               : "style-loader",
             "css-loader",
-            "sass-loader"
-          ]
+            "sass-loader",
+          ],
         },
         {
           test: /\.(png|jpg|gif)$/,
@@ -44,29 +44,29 @@ module.exports = (env, args) => {
             {
               loader: "file-loader",
               options: {
-                outputPath: "images"
-              }
-            }
-          ]
+                outputPath: "images",
+              },
+            },
+          ],
         },
         {
           test: /\.svg$/,
-          loader: "svg-inline-loader"
-        }
-      ]
+          loader: "svg-inline-loader",
+        },
+      ],
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: "styles.css"
+        filename: "styles.css",
       }),
       new HtmlWebpackPlugin({
         template: "./src/index.html",
-        favicon: "./src/images/favicon.png"
+        favicon: "./src/images/favicon.png",
       }),
       new CopyWebpackPlugin([
         { from: "./src/images/pwa-icons", to: "images/icons" },
         { from: "./src/manifest.json", to: "manifest.json" },
-        { from: "./src/sitemap.xml", to: "sitemap.xml" }
+        { from: "./src/sitemap.xml", to: "sitemap.xml" },
       ]),
       new SWPrecacheWebpackPlugin({
         cacheId: "meet-in-the-middle",
@@ -74,8 +74,8 @@ module.exports = (env, args) => {
         filename: "service-worker.js",
         minify: true,
         navigateFallback: PUBLIC_PATH + "index.html",
-        staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
-      })
-    ]
+        staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+      }),
+    ],
   };
 };
