@@ -19,7 +19,7 @@ export function initMap() {
 
 export function insertInfoWindow({ content, marker }) {
   const infoWindow = new google.maps.InfoWindow({
-    content
+    content,
   });
 
   infoWindow.open(map, marker);
@@ -40,7 +40,7 @@ export function setMapCenter({ locationLatLng, pan = false } = {}) {
 */
 export function showMiddlePointAndPlaces({
   middlePointLatLng,
-  showPlaces = true
+  showPlaces = true,
 }) {
   const title = "The Middle";
 
@@ -57,7 +57,7 @@ export function showMiddlePointAndPlaces({
     recenter: false,
     animation: "BOUNCE",
     draggable: true,
-    title
+    title,
   });
 
   middlePointMarker.addListener("click", () =>
@@ -67,10 +67,10 @@ export function showMiddlePointAndPlaces({
   scrollTop(0);
 
   // Listen for the middle marker being moved
-  google.maps.event.addListener(middlePointMarker, "dragend", position => {
+  google.maps.event.addListener(middlePointMarker, "dragend", (position) => {
     const newMiddleLocation = {
       lat: position.latLng.lat(),
-      lng: position.latLng.lng()
+      lng: position.latLng.lng(),
     };
 
     showSearchAreaButton({ newMiddleLocation });

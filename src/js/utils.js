@@ -15,7 +15,7 @@ export function showFixtureData() {
 
   bounds.extend({
     lat: 51.4788628,
-    lng: -0.0267169
+    lng: -0.0267169,
   });
 
   const middlePointLatLng = bounds.getCenter();

@@ -17,7 +17,7 @@ function resetError({ element }) {
 export function validateLocationsForm({ inputs }) {
   let hasError = false;
 
-  Object.keys(inputs).forEach(inputKey => {
+  Object.keys(inputs).forEach((inputKey) => {
     const input = inputs[inputKey];
 
     if (!input.element.value) {
@@ -25,7 +25,7 @@ export function validateLocationsForm({ inputs }) {
 
       renderError({
         element: input.element,
-        errorMessage: "A location is required"
+        errorMessage: "A location is required",
       });
 
       hasError = true;
@@ -35,7 +35,7 @@ export function validateLocationsForm({ inputs }) {
     if (!input.coordinates) {
       renderError({
         element: input.element,
-        errorMessage: "No coordinates found"
+        errorMessage: "No coordinates found",
       });
 
       hasError = true;

@@ -1,21 +1,21 @@
 import {
   insertInfoWindow,
   showMiddlePointAndPlaces,
-  setMapCenter
+  setMapCenter,
 } from "./map";
 import { insertMarker } from "./markers";
 import { getGeoLocation } from "./geo";
 import {
   addNewLocation,
   hideLocationsError,
-  toggleLocationLoading
+  toggleLocationLoading,
 } from "./ui";
 import { validateLocationsForm } from "./validation";
 import {
   NEW_LOCATION_CONTAINER_PREFIX,
   NEW_LOCATION_INPUT_PREFIX,
   REMOVE_LOCATION_BUTTON_PREFIX,
-  TABLET_WIDTH
+  TABLET_WIDTH,
 } from "./constants";
 import { removeElement, scrollTop } from "./utils";
 
@@ -34,14 +34,14 @@ export async function initLocationsAutocomplete() {
 
     const locationLatLng = {
       lat: position.coords.latitude,
-      lng: position.coords.longitude
+      lng: position.coords.longitude,
     };
 
     setMapCenter({ locationLatLng });
 
     const circle = new google.maps.Circle({
       center: locationLatLng,
-      radius: position.coords.accuracy
+      radius: position.coords.accuracy,
     });
 
     geoLocationBounds = circle.getBounds();
@@ -51,12 +51,12 @@ export async function initLocationsAutocomplete() {
 
   createAutocompleteInput({
     inputId: "yourLocation",
-    geoLocationBounds
+    geoLocationBounds,
   });
 
   createAutocompleteInput({
     inputId: "theirLocation",
-    geoLocationBounds
+    geoLocationBounds,
   });
 }
 
@@ -77,7 +77,7 @@ export function addLocationInput() {
 
   createAutocompleteInput({
     inputId: `${NEW_LOCATION_INPUT_PREFIX}${index}`,
-    geoLocationBounds
+    geoLocationBounds,
   });
 
   const $removeLocationButton = document.getElementById(
@@ -119,7 +119,7 @@ export function handleMeetButtonClicked() {
 */
 export function handleAddressSelected({
   inputId,
-  preSetCoordinates = false
+  preSetCoordinates = false,
 } = {}) {
   let title = "Location";
   let coordinates;
@@ -150,7 +150,7 @@ export function handleAddressSelected({
   const marker = insertMarker({
     locationLatLng: coordinates,
     title,
-    customMarkerHeight: 36
+    customMarkerHeight: 36,
   });
 
   locationInputs[inputId].marker = marker;
@@ -178,14 +178,14 @@ function createAutocompleteInput({ inputId, geoLocationBounds = null }) {
 
   const inputAutocomplete = new google.maps.places.Autocomplete(inputElement, {
     bounds: geoLocationBounds,
-    types: ["geocode"]
+    types: ["geocode"],
   });
 
   locationInputs[inputId] = {
     autocomplete: inputAutocomplete,
     element: inputElement,
     coordinates: null,
-    marker: null
+    marker: null,
   };
 
   inputAutocomplete.setFields(["geometry"]);

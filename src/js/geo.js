@@ -3,7 +3,7 @@ export const getGeoLocation = new Promise((resolve, reject) => {
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      position => {
+      (position) => {
         resolve(position);
       },
       () => {

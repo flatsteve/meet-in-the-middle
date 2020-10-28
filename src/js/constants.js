@@ -20,90 +20,90 @@ export const MAP_CONFIG = {
       elementType: "geometry.fill",
       stylers: [
         {
-          color: "#f5f5f5"
-        }
-      ]
+          color: "#f5f5f5",
+        },
+      ],
     },
     {
       featureType: "poi.attraction",
       elementType: "labels",
       stylers: [
         {
-          visibility: "off"
-        }
-      ]
+          visibility: "off",
+        },
+      ],
     },
     {
       featureType: "poi.business",
       elementType: "labels",
       stylers: [
         {
-          visibility: "off"
-        }
-      ]
+          visibility: "off",
+        },
+      ],
     },
     {
       featureType: "poi.government",
       elementType: "labels",
       stylers: [
         {
-          visibility: "off"
-        }
-      ]
+          visibility: "off",
+        },
+      ],
     },
     {
       featureType: "poi.medical",
       elementType: "labels",
       stylers: [
         {
-          visibility: "off"
-        }
-      ]
+          visibility: "off",
+        },
+      ],
     },
     {
       featureType: "poi.park",
       elementType: "labels",
       stylers: [
         {
-          visibility: "off"
-        }
-      ]
+          visibility: "off",
+        },
+      ],
     },
     {
       featureType: "poi.place_of_worship",
       elementType: "labels",
       stylers: [
         {
-          visibility: "off"
-        }
-      ]
+          visibility: "off",
+        },
+      ],
     },
     {
       featureType: "poi.school",
       elementType: "labels",
       stylers: [
         {
-          visibility: "off"
-        }
-      ]
+          visibility: "off",
+        },
+      ],
     },
     {
       featureType: "poi.sports_complex",
       elementType: "labels",
       stylers: [
         {
-          visibility: "off"
-        }
-      ]
+          visibility: "off",
+        },
+      ],
     },
     {
       featureType: "water",
       elementType: "geometry.fill",
       stylers: [
         {
-          color: "#b9d6f2"
-        }
-      ]
-    }
-  ]
+          color: "#b9d6f2",
+        },
+      ],
+    },
+  ],
 };
